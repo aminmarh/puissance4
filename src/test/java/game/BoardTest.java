@@ -1,8 +1,3 @@
-<<<<<<< Updated upstream
-import static org.junit.jupiter.api.Assertions.*;
-class BoardTest {
-  
-=======
 package game;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -22,6 +17,4 @@ class BoardTest {
 
         assertEquals(expected, board.toString());
     }
-
->>>>>>> Stashed changes
 }
