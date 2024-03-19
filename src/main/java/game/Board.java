@@ -12,6 +12,8 @@ public class Board {
             }
         }
     }
+
+
     public String toString (){
         StringBuilder sb = new StringBuilder();
         for (int row = 0; row < ROWS; row++) {
