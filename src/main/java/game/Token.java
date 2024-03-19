@@ -16,5 +16,4 @@ public enum Token {
             return " ";
         }
     }
-
 }
