@@ -1,5 +1,4 @@
 package game;
-
 import static org.junit.jupiter.api.Assertions.*;
 
 class BoardTest {
@@ -14,7 +13,6 @@ class BoardTest {
                 "| | | | | | | |\n" +
                 "| | | | | | | |\n" +
                 "| | | | | | | |\n" ;
-
         assertEquals(expected, board.toString());
     }
 }
