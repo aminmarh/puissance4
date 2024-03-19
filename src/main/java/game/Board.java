@@ -5,6 +5,9 @@ public class Board {
     private static final int COLUMNS=7;
     private Token[][] board;
 
+    private IPlayer[] players = new IPlayer[2];
+
+
     public Board (){
         this.board= new Token[ROWS][COLUMNS];
         for (int i=0; i<ROWS; i++){
@@ -14,6 +17,11 @@ public class Board {
         }
     }
 
+    public void play() {
+        while (true){
+
+        }
+    }
     public String toString (){
         StringBuilder sb = new StringBuilder();
         for (int row = 0; row < ROWS; row++) {
