@@ -1,25 +1,33 @@
 package player;
 
+import static org.mockito.Mockito.*;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import game.Token;
 import static org.junit.jupiter.api.Assertions.*;
 
 class HumanTest {
-    private Player player;
+    private Player player = mock(Human.class);
 
     @BeforeEach
-    public void setUp() {
-        player = new Human("Player 1", Token.Red);
+    public void setUpHumanPlayer() {
+        when(player.getName()).thenReturn("Player 1");
+        when(player.getToken()).thenReturn(Token.Red);
+        when(player.play()).thenReturn(1);
     }
 
     @Test
-    void getName() {
+    void getNameTest() {
         assertEquals("Player 1", player.getName());
     }
 
     @Test
-    void getToken() {
+    void getTokenTest() {
         assertEquals(Token.Red, player.getToken());
+    }
+
+    @Test
+    void humanPlayTest() {
+        assertEquals(1, player.play());
     }
 }

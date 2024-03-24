@@ -2,9 +2,9 @@ package player;
 
 import game.Token;
 
-public class IA extends Player{
+public class AI extends Player{
 
-    public IA(String name, Token token) {
+    public AI(String name, Token token) {
         super(name, token);
     }
 
