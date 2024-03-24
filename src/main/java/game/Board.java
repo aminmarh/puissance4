@@ -6,17 +6,20 @@ public class Board {
     private Token[][] board;
 
 
-    public Board (IPlayer[] players){
+    public Board (){
         this.board= new Token[ROWS][COLUMNS];
         for (int i=0; i<ROWS; i++){
             for (int j=0; j<COLUMNS;j++){
                 board[i][j]=Token.Empty;
             }
         }
-        this.players=players;
     }
 
-    private void putToken(int column, Token token) {
+    public Token[][] getBoard() {
+        return board.clone();
+    }
+
+    public void putToken(int column, Token token) {
         for (int i = ROWS - 1; i >= 0; i--) {
             if (board[i][column] == Token.Empty) {
                 board[i][column] = token;
@@ -24,7 +27,7 @@ public class Board {
         }
     }
 
-    private boolean isFull() {
+    public boolean isFull() {
         for (int i = 0; i < COLUMNS; i++) {
             if (board[0][i] == Token.Empty) {
                 return false;
@@ -33,7 +36,7 @@ public class Board {
         return true;
     }
 
-    private boolean isWinned() {
+    public boolean isWinned() {
         for (int row = 0; row < ROWS; row++) {
             for (int col = 0; col < COLUMNS; col++) {
                 Token token = board[row][col];
@@ -58,28 +61,7 @@ public class Board {
         return true;
     }
 
-    public IPlayer play() {
-        while (true) {
-            for (IPlayer player : players) {
-                int column = player.play();
-                boolean goodPlay = false;
-                while (!goodPlay) {
-                    try {
-                        putToken(column, player.getToken());
-                        goodPlay = true;
-                    } catch (ArrayIndexOutOfBoundsException e) {
-                        column = player.play();
-                    }
-                }
-                if (isWinned()) {
-                    return player;
-                }
-                if (isFull()) {
-                    return null;
-                }
-            }
-        }
-    }
+
     public String toString (){
         StringBuilder sb = new StringBuilder();
         for (int row = 0; row < ROWS; row++) {
