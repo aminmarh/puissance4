@@ -1,6 +1,8 @@
 package game;
 
 public class Table {
+    public static final int NB_JOUEURS = 2;
+
     private Board board;
     private IPlayer[] players;
 
