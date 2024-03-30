@@ -28,15 +28,24 @@ class BoardTest {
 
     @Test
     void testPutToken() {
-        board.putToken(0, Token.Red);
-        assertEquals(Token.Red, board.getBoard()[0][0]);
+        try {
+            board.putToken(0, Token.Red);
+        } catch (InvalidMoveException e) {
+            fail("Invalid move");
+        }
+        System.out.println(board.toString());
+        assertEquals(Token.Red, board.getBoard()[Board.ROWS - 1][0]);
     }
 
     @Test
     void testIsFull() {
-        for (int i = 0; i < 6; i++) {
-            for (int j = 0; j < 7; j++) {
-                board.putToken(j, Token.Red);
+        for (int i = 0; i < Board.COLUMNS; i++) {
+            for (int j = 0; j < Board.ROWS; j++) {
+                try {
+                    board.putToken(i, Token.Red);
+                } catch (InvalidMoveException e) {
+                    fail("Invalid move");
+                }
             }
         }
         assertTrue(board.isFull());
@@ -45,8 +54,27 @@ class BoardTest {
     @Test
     void testIsWinned() {
         for (int i = 0; i < 4; i++) {
-            board.putToken(i, Token.Red);
+            try {
+                board.putToken(i, Token.Red);
+            } catch (InvalidMoveException e) {
+                fail("Invalid move");
+            }
         }
         assertTrue(board.isWinned());
+    }
+
+    @Test
+    void testIsMoveValid() {
+        assertTrue(board.isMoveValid(0));
+        assertTrue(board.isMoveValid(6));
+        assertFalse(board.isMoveValid(7));
+        for (int i = 0; i < 6; i++) {
+            try {
+                board.putToken(1, Token.Red);
+            } catch (InvalidMoveException e) {
+                fail("Invalid move");
+            }
+        }
+        assertFalse(board.isMoveValid(1));
     }
 }

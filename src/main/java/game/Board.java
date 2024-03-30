@@ -1,8 +1,8 @@
 package game;
 
 public class Board {
-    private static final int ROWS=6;
-    private static final int COLUMNS=7;
+    public static final int ROWS=6;
+    public static final int COLUMNS=7;
     private Token[][] board;
 
 
@@ -19,12 +19,28 @@ public class Board {
         return board.clone();
     }
 
-    public void putToken(int column, Token token) {
+    public void putToken(int column, Token token) throws InvalidMoveException {
+        if(!isMoveValid(column)) {
+            throw new InvalidMoveException();
+        }
         for (int i = ROWS - 1; i >= 0; i--) {
             if (board[i][column] == Token.Empty) {
                 board[i][column] = token;
+                return;
             }
         }
+    }
+
+    public boolean isMoveValid(int column) {
+        if (column < 0 || column >= COLUMNS) {
+            return false;
+        }
+        for (int i = 0; i < ROWS; i++) {
+            if (board[i][column] == Token.Empty) {
+                return true;
+            }
+        }
+        return false;
     }
 
     public boolean isFull() {
