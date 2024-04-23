@@ -13,7 +13,7 @@ class AITest {
     public void setUpAIPlayer() {
         when(player.getName()).thenReturn("AI");
         when(player.getToken()).thenReturn(Token.Yellow);
-        when(player.play()).thenReturn(5);
+        when(player.play(null)).thenReturn(5);
     }
 
     @Test
@@ -28,6 +28,6 @@ class AITest {
 
     @Test
     void AIPlayTest() {
-        assertEquals(5, player.play());
+        assertEquals(5, player.play(null));
     }
 }

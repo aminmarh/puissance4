@@ -6,20 +6,24 @@ import game.Board;
 import game.IHumanComputerInterface;
 import game.IPlayer;
 import game.Table;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 import player.IPlayerHumanComputerInterface;
 
 import java.util.InputMismatchException;
 import java.util.Properties;
 import java.util.Scanner;
 
-public class HCI implements IHumanComputerInterface, IPlayerHumanComputerInterface {
+@Component
+public class HumanComputerInterface implements IHumanComputerInterface, IPlayerHumanComputerInterface {
 
     private Properties strings;
     private Scanner sc;
 
     private IPlayerFactory playerFactory;
 
-    public HCI(Properties strings, IPlayerFactory playerFactory) {
+    @Autowired
+    public HumanComputerInterface(Properties strings, IPlayerFactory playerFactory) {
         this.strings = strings;
         sc = new Scanner(System.in);
         this.playerFactory = playerFactory;
@@ -63,5 +67,25 @@ public class HCI implements IHumanComputerInterface, IPlayerHumanComputerInterfa
     @Override
     public void showBoard(Board board) {
         System.out.println(board.toString());
+    }
+
+    @Override
+    public int playRound() {
+        int choice = -1;
+        boolean validNumber = false;
+        while (!validNumber) {
+            try {
+                choice = sc.nextInt();
+                validNumber = true;
+            } catch (InputMismatchException e) {
+                System.out.println(strings.get("number_error"));
+            }
+        }
+        return choice;
+    }
+
+    @Override
+    public void badMove() {
+        System.out.println(strings.get("invalid_column"));
     }
 }

@@ -1,5 +1,7 @@
 package com.example.puissance4;
 
+import game.Board;
+import game.Table;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 

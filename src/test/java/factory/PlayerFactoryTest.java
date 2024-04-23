@@ -12,8 +12,7 @@ class PlayerFactoryTest {
 
     @BeforeEach
     void setUpTest() {
-        this.playerFactory = new PlayerFactory();
-
+        this.playerFactory = new PlayerFactory(null);
     }
 
     @Test

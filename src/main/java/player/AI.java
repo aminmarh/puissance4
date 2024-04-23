@@ -1,5 +1,7 @@
 package player;
 
+import game.Board;
+import game.InvalidMoveException;
 import game.Token;
 
 public class AI extends Player{
@@ -8,7 +10,7 @@ public class AI extends Player{
         super(name, token);
     }
 
-    public int play() {
-        return 0;
+    @Override
+    public void play(Board board) {
     }
 }

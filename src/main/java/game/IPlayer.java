@@ -5,5 +5,5 @@ public interface IPlayer {
 
     public Token getToken();
 
-    public int play();
+    public void play(Board board);
 }

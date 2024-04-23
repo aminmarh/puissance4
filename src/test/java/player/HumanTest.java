@@ -13,7 +13,7 @@ class HumanTest {
     public void setUpHumanPlayer() {
         when(player.getName()).thenReturn("Player 1");
         when(player.getToken()).thenReturn(Token.Red);
-        when(player.play()).thenReturn(1);
+        when(player.play(null)).thenReturn(1);
     }
 
     @Test
@@ -28,6 +28,6 @@ class HumanTest {
 
     @Test
     void humanPlayTest() {
-        assertEquals(1, player.play());
+        assertEquals(1, player.play(null));
     }
 }

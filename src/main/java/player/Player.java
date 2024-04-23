@@ -1,6 +1,8 @@
 package player;
 
+import game.Board;
 import game.IPlayer;
+import game.InvalidMoveException;
 import game.Token;
 
 public abstract class Player implements IPlayer {
@@ -20,5 +22,5 @@ public abstract class Player implements IPlayer {
         return token;
     }
 
-    public abstract int play();
+    public abstract void play(Board board);
 }

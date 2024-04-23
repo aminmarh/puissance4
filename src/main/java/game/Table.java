@@ -6,24 +6,15 @@ public class Table {
     private Board board;
     private IPlayer[] players;
 
-    public Table (Board board, IPlayer[] players) {
-        this.board = board;
+    public Table (IPlayer[] players) {
+        this.board = new Board();
         this.players = players;
     }
 
     public IPlayer play() {
         while (true) {
             for (IPlayer player : players) {
-                int column = player.play();
-                boolean goodPlay = false;
-                while (!goodPlay) {
-                    try {
-                        this.board.putToken(column, player.getToken());
-                        goodPlay = true;
-                    } catch (ArrayIndexOutOfBoundsException e) {
-                        column = player.play();
-                    }
-                }
+                player.play(this.board);
                 if (this.board.isWinned()) {
                     return player;
                 }
