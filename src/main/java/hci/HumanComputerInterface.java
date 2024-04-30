@@ -6,49 +6,45 @@ import game.Board;
 import game.IHumanComputerInterface;
 import game.IPlayer;
 import game.Table;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import player.IPlayerHumanComputerInterface;
-
 import java.util.InputMismatchException;
-import java.util.Properties;
-import java.util.Scanner;
 
 @Component
 public class HumanComputerInterface implements IHumanComputerInterface, IPlayerHumanComputerInterface {
-
-    private Properties strings;
-    private Scanner sc;
-
     private IPlayerFactory playerFactory;
+    IInput in;
+    IOutput out;
 
-    @Autowired
-    public HumanComputerInterface(Properties strings, IPlayerFactory playerFactory) {
-        this.strings = strings;
-        sc = new Scanner(System.in);
+    // TODO: maybe transfer the input mismatch errors to the console class
+    public HumanComputerInterface(IPlayerFactory playerFactory, IInput in, IOutput out) {
         this.playerFactory = playerFactory;
+        this.in = in;
+        this.out = out;
     }
 
     @Override
     public void initGame(){
-        System.out.println(strings.get("welcome_message"));
+        out.welcome();
         for (int i=0; i< Table.NB_JOUEURS;i++) {
             String name;
-            System.out.println(strings.get("player_name"));
-            name = sc.nextLine();
 
-            System.out.println(strings.get("player_type"));
+            out.askPlayerName();
+            name = in.retrievePlayerName();
+
+
+            out.askPlayerType();
             boolean validChoice = false;
             int choice;
             while (!validChoice) {
                 try {
-                    choice = sc.nextInt();
+                    choice = in.retrievePlayerType();
                     validChoice = choice == 1 || choice == 2;
                     playerFactory.createPlayer(choice, name);
                 } catch (InputMismatchException e) {
-                    System.out.println(strings.get("number_error"));
+                    out.alertInvalidNumber();
                 } catch (InvalidPlayerTypeException e) {
-                    System.out.println(strings.get("invalid_player_type"));
+                    out.alertInvalidPlayerType();
                 }
             }
         }
@@ -57,16 +53,16 @@ public class HumanComputerInterface implements IHumanComputerInterface, IPlayerH
     @Override
     public void finishGame(IPlayer winner) {
         if (winner == null) {
-            System.out.println(strings.get("draw_message"));
+            out.announceDraw();
         } else {
-            System.out.printf((String) strings.get("victory_message"), winner.getName());
+            out.announceVictory(winner.getName());
         }
-        System.out.println(strings.get("goodbye_message"));
+        out.goodbye();
     }
 
     @Override
     public void showBoard(Board board) {
-        System.out.println(board.toString());
+        out.displayBoard(board.toString());
     }
 
     @Override
@@ -75,10 +71,10 @@ public class HumanComputerInterface implements IHumanComputerInterface, IPlayerH
         boolean validNumber = false;
         while (!validNumber) {
             try {
-                choice = sc.nextInt();
+                choice = in.retrievePlayerMove();
                 validNumber = true;
             } catch (InputMismatchException e) {
-                System.out.println(strings.get("number_error"));
+                out.alertInvalidNumber();
             }
         }
         return choice;
@@ -86,6 +82,6 @@ public class HumanComputerInterface implements IHumanComputerInterface, IPlayerH
 
     @Override
     public void badMove() {
-        System.out.println(strings.get("invalid_column"));
+        out.alertInvalidColumn();
     }
 }
