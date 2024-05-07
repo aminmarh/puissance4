@@ -23,7 +23,7 @@ class PlayerHumanComputerInterfaceTest {
     @Test
     void playRoundTest() {
         when(in.retrievePlayerMove()).thenReturn(1);
-        int choice = playerHCI.playRound();
+        int choice = playerHCI.playRound("player1");
         verify(in, times(1)).retrievePlayerMove();
         assertEquals(0, choice);
     }
@@ -31,7 +31,7 @@ class PlayerHumanComputerInterfaceTest {
     @Test
     void playRoundInvalidNumberTest() {
         when(in.retrievePlayerMove()).thenThrow(InputMismatchException.class).thenReturn(1);
-        playerHCI.playRound();
+        playerHCI.playRound("player1");
         verify(out, times(1)).alertInvalidNumber();
     }
 

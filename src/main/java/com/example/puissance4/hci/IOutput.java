@@ -11,4 +11,5 @@ public interface IOutput {
     void announceDraw();
     void announceVictory(String winner);
     void goodbye();
+    void callPlayer(String name);
 }

@@ -52,7 +52,8 @@ public class HumanComputerInterface implements IHumanComputerInterface{
     }
 
     @Override
-    public void finishGame(IPlayer winner) {
+    public void finishGame(IPlayer winner, Board board) {
+        showBoard(board);
         if (winner == null) {
             out.announceDraw();
         } else {

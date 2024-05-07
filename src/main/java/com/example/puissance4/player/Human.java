@@ -16,7 +16,7 @@ public class Human extends Player {
         boolean goodMove = false;
         while (!goodMove) {
             try {
-                board.putToken(app.playRound(), this.getToken());
+                board.putToken(app.playRound(this.getName()), this.getToken());
                 goodMove = true;
             } catch (InvalidMoveException e) {
                 app.badMove();

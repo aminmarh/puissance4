@@ -23,11 +23,11 @@ public class Table {
                 gameManager.showBoard(this.board);
                 player.play(this.board);
                 if (this.board.isWon()) {
-                    gameManager.finishGame(player);
+                    gameManager.finishGame(player, this.board);
                     return;
                 }
                 if (this.board.isFull()) {
-                    gameManager.finishGame(null);
+                    gameManager.finishGame(null, this.board);
                     return;
                 }
             }
