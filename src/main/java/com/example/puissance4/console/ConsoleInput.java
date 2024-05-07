@@ -15,7 +15,11 @@ public class ConsoleInput implements IInput {
     }
     @Override
     public String retrievePlayerName() {
-        return sc.next().trim();
+        if (sc.hasNext()) {
+            return sc.next().trim();
+        } else {
+            return "";
+        }
     }
 
     @Override

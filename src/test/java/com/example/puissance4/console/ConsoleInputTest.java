@@ -13,7 +13,7 @@ class ConsoleInputTest {
 
     @Test
     void retrievePlayerNameEmptyTest() {
-        String input = "\n";
+        String input = "";
         InputStream in = new ByteArrayInputStream(input.getBytes());
         consoleInput = new ConsoleInput(in);
         assertEquals("", consoleInput.retrievePlayerName());
