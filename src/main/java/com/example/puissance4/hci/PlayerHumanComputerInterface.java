@@ -27,7 +27,7 @@ public class PlayerHumanComputerInterface implements IPlayerHumanComputerInterfa
                 out.alertInvalidNumber();
             }
         }
-        return choice;
+        return choice - 1;
     }
 
     @Override
