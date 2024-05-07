@@ -41,7 +41,7 @@ class HumanComputerInterfaceTest {
     void finishGameTest() {
         IPlayer player = mock(IPlayer.class);
         when(player.getName()).thenReturn("Player1");
-        hci.finishGame(player, null);
+        hci.finishGame(player, mock(Board.class));
         verify(out, times(1)).announceVictory(anyString());
         verify(out, times(1)).goodbye();
     }
