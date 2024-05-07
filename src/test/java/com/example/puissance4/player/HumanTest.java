@@ -24,7 +24,7 @@ class HumanTest {
 
     @Test
     void playTest() throws InvalidMoveException {
-        when(app.playRound()).thenReturn(1);
+        when(app.playRound("Human")).thenReturn(1);
         humanPlayer.play(board);
         boolean isMoveMade = false;
         for (int i = 0; i < Board.ROWS; i++) {

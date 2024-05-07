@@ -69,7 +69,6 @@ public class ConsoleOutput implements IOutput {
         try {
             out.write ("|1|2|3|4|5|6|7|\n".getBytes(StandardCharsets.UTF_8));
             out.write(board.getBytes(StandardCharsets.UTF_8));
-            out.write("\n".getBytes(StandardCharsets.UTF_8));
         } catch (Exception e){
             Logger.getAnonymousLogger().severe(e.getMessage());
         }
@@ -111,5 +110,16 @@ public class ConsoleOutput implements IOutput {
         } catch (Exception e){
             Logger.getAnonymousLogger().severe(e.getMessage());
         }
+    }
+
+    @Override
+    public void callPlayer(String name) {
+        try {
+            out.write(l10n.getMessage("player_prompt", new Object[]{name}, Locale.ENGLISH).getBytes(StandardCharsets.UTF_8));
+            out.write("\n".getBytes(StandardCharsets.UTF_8));
+        } catch (Exception e){
+            Logger.getAnonymousLogger().severe(e.getMessage());
+        }
+
     }
 }

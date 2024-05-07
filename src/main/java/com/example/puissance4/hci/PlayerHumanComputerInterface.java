@@ -16,7 +16,8 @@ public class PlayerHumanComputerInterface implements IPlayerHumanComputerInterfa
         this.out = out;
     }
     @Override
-    public int playRound() {
+    public int playRound(String playerName) {
+        out.callPlayer(playerName);
         int choice = -1;
         boolean validNumber = false;
         while (!validNumber) {
