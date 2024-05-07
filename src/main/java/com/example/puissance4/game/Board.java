@@ -88,4 +88,42 @@ public class Board {
         }
         return sb.toString();
     }
+
+    /**
+     * Evaluates if placing a token in a specified column can result in a win.
+     * This method simulates the placement of a token in the given column and checks if it leads to a winning condition.
+     * After the check, it reverses the move to leave the board state unchanged.
+     *
+     * @param column the column index where the token is to be placed to check for a win.
+     * @param token the type of token (Red or Yellow) to place in the column.
+     * @return true if placing the token in the column results in a win, otherwise false.
+     */
+    public boolean canWinInNextMove(int column, Token token) {
+        // First, check if the move is valid (i.e., if the column is not full).
+        if (!isMoveValid(column)) {
+            return false;
+        }
+
+        // Temporarily place the token in the first available row from the bottom that is empty.
+        int rowToPlace = -1;  // Initialize with -1 to indicate no token placed yet.
+        for (int i = ROWS - 1; i >= 0; i--) {
+            if (board[i][column] == Token.Empty) {
+                rowToPlace = i;
+                board[i][column] = token;  // Place token to simulate the move.
+                break;
+            }
+        }
+
+        // Check if this move leads to a winning condition.
+        boolean canWin = isWon();
+
+        // Remove the token to revert the board to its original state.
+        if (rowToPlace != -1) {
+            board[rowToPlace][column] = Token.Empty;
+        }
+
+        // Return whether the simulated move can win the game.
+        return canWin;
+    }
+
 }
