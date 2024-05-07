@@ -7,6 +7,7 @@ import org.springframework.stereotype.Component;
 import java.io.OutputStream;
 import java.nio.charset.StandardCharsets;
 import java.util.Locale;
+import java.util.logging.Logger;
 
 @Component
 public class ConsoleOutput implements IOutput {
@@ -21,8 +22,9 @@ public class ConsoleOutput implements IOutput {
     public void welcome() {
         try{
             out.write(l10n.getMessage("welcome_message", null, Locale.ENGLISH).getBytes(StandardCharsets.UTF_8));
+            out.write("\n".getBytes(StandardCharsets.UTF_8));
         } catch (Exception e){
-            // do nothing
+            Logger.getAnonymousLogger().severe(e.getMessage());
         }
     }
 
@@ -31,7 +33,7 @@ public class ConsoleOutput implements IOutput {
         try{
             out.write(l10n.getMessage("player_name", null, Locale.ENGLISH).getBytes(StandardCharsets.UTF_8));
         } catch (Exception e){
-            // do nothing
+            Logger.getAnonymousLogger().severe(e.getMessage());
         }
     }
 
@@ -40,7 +42,7 @@ public class ConsoleOutput implements IOutput {
         try{
             out.write(l10n.getMessage("player_type", null, Locale.ENGLISH).getBytes(StandardCharsets.UTF_8));
         } catch (Exception e){
-            // do nothing
+            Logger.getAnonymousLogger().severe(e.getMessage());
         }
     }
 
@@ -49,7 +51,7 @@ public class ConsoleOutput implements IOutput {
         try {
             out.write(l10n.getMessage("number_error", null, Locale.ENGLISH).getBytes(StandardCharsets.UTF_8));
         } catch (Exception e){
-            // do nothing
+            Logger.getAnonymousLogger().severe(e.getMessage());
         }
     }
 
@@ -58,16 +60,18 @@ public class ConsoleOutput implements IOutput {
         try {
             out.write(l10n.getMessage("invalid_player_type", null, Locale.ENGLISH).getBytes(StandardCharsets.UTF_8));
         } catch (Exception e){
-            // do nothing
+            Logger.getAnonymousLogger().severe(e.getMessage());
         }
     }
 
     @Override
     public void displayBoard(String board) {
         try {
+            out.write ("|1|2|3|4|5|6|7|\n".getBytes(StandardCharsets.UTF_8));
             out.write(board.getBytes(StandardCharsets.UTF_8));
+            out.write("\n".getBytes(StandardCharsets.UTF_8));
         } catch (Exception e){
-            // do nothing
+            Logger.getAnonymousLogger().severe(e.getMessage());
         }
     }
 
@@ -76,7 +80,7 @@ public class ConsoleOutput implements IOutput {
         try {
             out.write(l10n.getMessage("invalid_column", null, Locale.ENGLISH).getBytes(StandardCharsets.UTF_8));
         } catch (Exception e){
-            // do nothing
+            Logger.getAnonymousLogger().severe(e.getMessage());
         }
     }
 
@@ -84,8 +88,9 @@ public class ConsoleOutput implements IOutput {
     public void announceDraw() {
         try {
             out.write(l10n.getMessage("draw_message", null, Locale.ENGLISH).getBytes(StandardCharsets.UTF_8));
+            out.write("\n".getBytes(StandardCharsets.UTF_8));
         } catch (Exception e){
-            // do nothing
+            Logger.getAnonymousLogger().severe(e.getMessage());
         }
     }
 
@@ -93,8 +98,9 @@ public class ConsoleOutput implements IOutput {
     public void announceVictory(String winner) {
         try {
             out.write(l10n.getMessage("victory_message", new Object[]{winner}, Locale.ENGLISH).getBytes(StandardCharsets.UTF_8));
+            out.write("\n".getBytes(StandardCharsets.UTF_8));
         } catch (Exception e){
-            // do nothing
+            Logger.getAnonymousLogger().severe(e.getMessage());
         }
     }
 
@@ -103,7 +109,7 @@ public class ConsoleOutput implements IOutput {
         try {
             out.write(l10n.getMessage("goodbye_message", null, Locale.ENGLISH).getBytes(StandardCharsets.UTF_8));
         } catch (Exception e){
-            // do nothing
+            Logger.getAnonymousLogger().severe(e.getMessage());
         }
     }
 }

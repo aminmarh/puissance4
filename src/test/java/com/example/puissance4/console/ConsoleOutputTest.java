@@ -6,14 +6,12 @@ import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.springframework.context.MessageSource;
 
-import java.io.ByteArrayOutputStream;
 import java.io.OutputStream;
 import java.nio.charset.StandardCharsets;
 import java.util.Locale;
 
-import static org.junit.jupiter.api.Assertions.*;
-import static org.mockito.Mockito.*;
 import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
 
 class ConsoleOutputTest {
     @Mock

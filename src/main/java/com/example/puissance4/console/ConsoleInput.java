@@ -15,13 +15,11 @@ public class ConsoleInput implements IInput {
     }
     @Override
     public String retrievePlayerName() {
-        return sc.nextLine();
+        return sc.next().trim();
     }
 
     @Override
-    public int retrievePlayerType() {
-        return sc.nextInt();
-    }
+    public int retrievePlayerType() {return sc.nextInt();}
 
     @Override
     public int retrievePlayerMove() {
