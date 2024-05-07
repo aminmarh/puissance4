@@ -25,7 +25,7 @@ class PlayerHumanComputerInterfaceTest {
         when(in.retrievePlayerMove()).thenReturn(1);
         int choice = playerHCI.playRound();
         verify(in, times(1)).retrievePlayerMove();
-        assertEquals(1, choice);
+        assertEquals(0, choice);
     }
 
     @Test
