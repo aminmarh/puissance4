@@ -1,4 +1,4 @@
-package game;
+package com.example.puissance4.game;
 
 public enum Token {
     Red{

@@ -1,13 +1,13 @@
-package player;
+package com.example.puissance4.player;
 
-import game.IPlayer;
-import game.Token;
+import com.example.puissance4.game.IPlayer;
+import com.example.puissance4.game.Token;
 
 public abstract class Player implements IPlayer {
     private String name;
     private Token token;
 
-    public Player(String name, Token token){
+    protected Player(String name, Token token){
         this.name=name;
         this.token=token;
     }
@@ -19,6 +19,4 @@ public abstract class Player implements IPlayer {
     public Token getToken(){
         return token;
     }
-
-    public abstract int play();
 }
