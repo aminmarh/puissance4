@@ -16,7 +16,6 @@ public class HumanComputerInterface implements IHumanComputerInterface{
     private IInput in;
     private IOutput out;
 
-    // TODO: maybe transfer the input mismatch errors to the console class
     public HumanComputerInterface(IPlayerFactory playerFactory, IInput in, IOutput out) {
         this.playerFactory = playerFactory;
         this.in = in;
@@ -32,17 +31,22 @@ public class HumanComputerInterface implements IHumanComputerInterface{
             out.askPlayerName();
             name = in.retrievePlayerName();
 
-
-            out.askPlayerType();
             boolean validChoice = false;
-            int choice;
+            int choice = 0;
+            out.askPlayerType();
+
             while (!validChoice) {
                 try {
                     choice = in.retrievePlayerType();
-                    validChoice = choice == 1 || choice == 2;
-                    playerFactory.createPlayer(choice, name);
+                    if (choice == 1 || choice == 2) {
+                        playerFactory.createPlayer(choice, name);
+                        validChoice = true;
+                    } else {
+                        out.alertInvalidPlayerType();
+                    }
                 } catch (InputMismatchException e) {
                     out.alertInvalidNumber();
+                    in.clearInputBuffer();
                 } catch (InvalidPlayerTypeException e) {
                     out.alertInvalidPlayerType();
                 }

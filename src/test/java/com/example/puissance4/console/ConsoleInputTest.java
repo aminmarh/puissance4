@@ -13,7 +13,7 @@ class ConsoleInputTest {
 
     @Test
     void retrievePlayerNameEmptyTest() {
-        String input = "";
+        String input = "\n";
         InputStream in = new ByteArrayInputStream(input.getBytes());
         consoleInput = new ConsoleInput(in);
         assertEquals("", consoleInput.retrievePlayerName());
@@ -21,7 +21,7 @@ class ConsoleInputTest {
 
     @Test
     void retrievePlayerTypeNotIntegerTest() {
-        String input = "notAnInteger\n";
+        String input = "notAnInteger\n1\n";
         InputStream in = new ByteArrayInputStream(input.getBytes());
         consoleInput = new ConsoleInput(in);
         assertThrows(InputMismatchException.class, () -> consoleInput.retrievePlayerType());
@@ -29,7 +29,7 @@ class ConsoleInputTest {
 
     @Test
     void retrievePlayerMoveNotIntegerTest() {
-        String input = "notAnInteger\n";
+        String input = "notAnInteger\n1\n";
         InputStream in = new ByteArrayInputStream(input.getBytes());
         consoleInput = new ConsoleInput(in);
         assertThrows(InputMismatchException.class, () -> consoleInput.retrievePlayerMove());
@@ -37,7 +37,7 @@ class ConsoleInputTest {
 
     @Test
     void retrievePlayerTypeNegativeTest() {
-        String input = "-1\n";
+        String input = "\n-1\n";
         InputStream in = new ByteArrayInputStream(input.getBytes());
         consoleInput = new ConsoleInput(in);
         assertEquals(-1, consoleInput.retrievePlayerType());
@@ -45,9 +45,40 @@ class ConsoleInputTest {
 
     @Test
     void retrievePlayerMoveNegativeTest() {
-        String input = "-1\n";
+        String input = "\n-1\n";
         InputStream in = new ByteArrayInputStream(input.getBytes());
         consoleInput = new ConsoleInput(in);
         assertEquals(-1, consoleInput.retrievePlayerMove());
+    }
+
+    @Test
+    void retrievePlayerTypeInRangeTest() {
+        String input = "1\n2\n";
+        InputStream in = new ByteArrayInputStream(input.getBytes());
+        consoleInput = new ConsoleInput(in);
+        assertEquals(1, consoleInput.retrievePlayerType());
+        assertEquals(2, consoleInput.retrievePlayerType());
+    }
+
+    @Test
+    void retrievePlayerMoveInRangeTest() {
+        String input = "1\n7\n";
+        InputStream in = new ByteArrayInputStream(input.getBytes());
+        consoleInput = new ConsoleInput(in);
+        assertEquals(1, consoleInput.retrievePlayerMove());
+        assertEquals(7, consoleInput.retrievePlayerMove());
+    }
+
+    @Test
+    void clearInputBufferTest() {
+        String input = "invalid\n1\n";
+        InputStream in = new ByteArrayInputStream(input.getBytes());
+        consoleInput = new ConsoleInput(in);
+        try {
+            consoleInput.retrievePlayerType(); // This should fail
+        } catch (InputMismatchException ex) {
+            consoleInput.clearInputBuffer(); // Clear the buffer
+        }
+        assertEquals(1, consoleInput.retrievePlayerType());
     }
 }
