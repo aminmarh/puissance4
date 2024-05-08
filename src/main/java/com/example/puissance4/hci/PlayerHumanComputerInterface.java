@@ -1,6 +1,5 @@
 package com.example.puissance4.hci;
 
-import com.example.puissance4.factory.IPlayerFactory;
 import com.example.puissance4.player.IPlayerHumanComputerInterface;
 import org.springframework.stereotype.Component;
 
@@ -18,14 +17,19 @@ public class PlayerHumanComputerInterface implements IPlayerHumanComputerInterfa
     @Override
     public int playRound(String playerName) {
         out.callPlayer(playerName);
-        int choice = -1;
+        int choice = 0;
         boolean validNumber = false;
         while (!validNumber) {
             try {
                 choice = in.retrievePlayerMove();
-                validNumber = true;
+                if (choice >= 1 && choice <= 7) {
+                    validNumber = true;
+                } else {
+                    out.alertInvalidColumn();
+                }
             } catch (InputMismatchException e) {
                 out.alertInvalidNumber();
+                in.clearInputBuffer();
             }
         }
         return choice - 1;
