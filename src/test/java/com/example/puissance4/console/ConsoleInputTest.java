@@ -74,11 +74,7 @@ class ConsoleInputTest {
         String input = "invalid\n1\n";
         InputStream in = new ByteArrayInputStream(input.getBytes());
         consoleInput = new ConsoleInput(in);
-        try {
-            consoleInput.retrievePlayerType(); // This should fail
-        } catch (InputMismatchException ex) {
-            consoleInput.clearInputBuffer(); // Clear the buffer
-        }
+        assertThrows(InputMismatchException.class, () -> consoleInput.retrievePlayerType());
         assertEquals(1, consoleInput.retrievePlayerType());
     }
 }

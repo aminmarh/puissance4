@@ -46,7 +46,6 @@ public class HumanComputerInterface implements IHumanComputerInterface{
                     }
                 } catch (InputMismatchException e) {
                     out.alertInvalidNumber();
-                    in.clearInputBuffer();
                 } catch (InvalidPlayerTypeException e) {
                     out.alertInvalidPlayerType();
                 }

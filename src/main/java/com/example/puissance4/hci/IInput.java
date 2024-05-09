@@ -4,5 +4,4 @@ public interface IInput {
     String retrievePlayerName();
     int retrievePlayerType();
     int retrievePlayerMove();
-    void clearInputBuffer();
 }
