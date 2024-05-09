@@ -1,26 +1,42 @@
 package com.example.puissance4.game;
 
+/**
+ * Represents the game board for Puissance 4 (Connect Four). This class manages the state of the board and provides
+ * functionality to manipulate and query the state of the game.
+ */
 public class Board {
-    public static final int ROWS=6;
-    public static final int COLUMNS=7;
+    public static final int ROWS = 6;
+    public static final int COLUMNS = 7;
     private Token[][] board;
 
-
-    public Board (){
-        this.board= new Token[ROWS][COLUMNS];
-        for (int i=0; i<ROWS; i++){
-            for (int j=0; j<COLUMNS;j++){
-                board[i][j]=Token.Empty;
+    /**
+     * Initializes an empty game board with all slots set to Token.Empty.
+     */
+    public Board() {
+        this.board = new Token[ROWS][COLUMNS];
+        for (int i = 0; i < ROWS; i++) {
+            for (int j = 0; j < COLUMNS; j++) {
+                board[i][j] = Token.Empty;
             }
         }
     }
 
+    /**
+     * Returns a deep copy of the game board.
+     * @return A clone of the board array.
+     */
     public Token[][] getBoard() {
         return board.clone();
     }
 
+    /**
+     * Attempts to place a token in the specified column.
+     * @param column The column index where the token should be placed.
+     * @param token The type of token to place.
+     * @throws InvalidMoveException if the column is full or invalid.
+     */
     public void putToken(int column, Token token) throws InvalidMoveException {
-        if(!isMoveValid(column)) {
+        if (!isMoveValid(column)) {
             throw new InvalidMoveException();
         }
         for (int i = ROWS - 1; i >= 0; i--) {
@@ -31,6 +47,11 @@ public class Board {
         }
     }
 
+    /**
+     * Checks if placing a token in the specified column is valid.
+     * @param column The column index to check.
+     * @return true if the column is within bounds and has space available, false otherwise.
+     */
     public boolean isMoveValid(int column) {
         if (column < 0 || column >= COLUMNS) {
             return false;
@@ -43,6 +64,10 @@ public class Board {
         return false;
     }
 
+    /**
+     * Determines if the board is completely filled with tokens.
+     * @return true if all slots are occupied, false otherwise.
+     */
     public boolean isFull() {
         for (int i = 0; i < COLUMNS; i++) {
             if (board[0][i] == Token.Empty) {
@@ -52,6 +77,10 @@ public class Board {
         return true;
     }
 
+    /**
+     * Checks if any player has won the game.
+     * @return true if there is a winning line of four consecutive tokens, false otherwise.
+     */
     public boolean isWon() {
         for (int row = 0; row < ROWS; row++) {
             for (int col = 0; col < COLUMNS; col++) {
@@ -68,6 +97,15 @@ public class Board {
         return false;
     }
 
+    /**
+     * Checks a specific direction for four consecutive matching tokens.
+     * @param token The token type to check.
+     * @param row The starting row index.
+     * @param col The starting column index.
+     * @param rowDir The row direction to check.
+     * @param colDir The column direction to check.
+     * @return true if four consecutive tokens match the starting token, false otherwise.
+     */
     private boolean checkDirection(Token token, int row, int col, int rowDir, int colDir) {
         for (int i = 0; i < 4; i++) {
             if (board[row + i * rowDir][col + i * colDir] != token) {
@@ -77,7 +115,10 @@ public class Board {
         return true;
     }
 
-
+    /**
+     * Provides a visual representation of the game board as a string.
+     * @return String representation of the board.
+     */
     public String toString (){
         StringBuilder sb = new StringBuilder();
         for (int row = 0; row < ROWS; row++) {

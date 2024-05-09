@@ -10,30 +10,45 @@ import org.springframework.stereotype.Component;
 
 import java.util.InputMismatchException;
 
+/**
+ * Implements the IHumanComputerInterface to manage interactions between the game's human and computer elements.
+ * This class coordinates the game setup, play, and conclusion processes, interfacing between the user input/output and the game logic.
+ */
 @Component
-public class HumanComputerInterface implements IHumanComputerInterface{
-    private IPlayerFactory playerFactory;
-    private IInput in;
-    private IOutput out;
+public class HumanComputerInterface implements IHumanComputerInterface {
+    private IPlayerFactory playerFactory; // Factory for creating player objects.
+    private IInput in;                    // Interface for handling user input.
+    private IOutput out;                  // Interface for handling user output.
 
+    /**
+     * Constructs a HumanComputerInterface with necessary dependencies for managing players and interacting with users.
+     * @param playerFactory The factory responsible for creating and managing players.
+     * @param in The input handler for obtaining user input.
+     * @param out The output handler for sending information to the user.
+     */
     public HumanComputerInterface(IPlayerFactory playerFactory, IInput in, IOutput out) {
         this.playerFactory = playerFactory;
         this.in = in;
         this.out = out;
     }
 
+    /**
+     * Initializes the game by setting up players and welcoming users.
+     * It prompts for player names and types, creating players accordingly.
+     * @return An array of IPlayer, each representing an initialized player.
+     */
     @Override
-    public IPlayer[] initGame(){
-        out.welcome();
+    public IPlayer[] initGame() {
+        out.welcome(); // Display a welcome message.
         for (int i = 0; i< Table.NB_JOUEURS; i++) {
             String name;
 
-            out.askPlayerName();
-            name = in.retrievePlayerName();
+            out.askPlayerName(); // Ask for the player's name.
+            name = in.retrievePlayerName(); // Retrieve the name entered by the user.
 
             boolean validChoice = false;
             int choice = 0;
-            out.askPlayerType();
+            out.askPlayerType(); // Ask for the type of player (Human or AI).
 
             while (!validChoice) {
                 try {
@@ -45,28 +60,37 @@ public class HumanComputerInterface implements IHumanComputerInterface{
                         out.alertInvalidPlayerType();
                     }
                 } catch (InputMismatchException e) {
-                    out.alertInvalidNumber();
+                    out.alertInvalidNumber(); // Alert if the input is not a valid integer.
                 } catch (InvalidPlayerTypeException e) {
-                    out.alertInvalidPlayerType();
+                    out.alertInvalidPlayerType(); // Alert if the chosen player type is invalid.
                 }
             }
         }
-        return this.playerFactory.getPlayers();
+        return this.playerFactory.getPlayers();// Return the array of created players.
     }
 
+    /**
+     * Handles the end of the game by displaying the final board state, announcing the result, and saying goodbye.
+     * @param winner The player who has won the game or null if the game ended in a draw.
+     * @param board The final state of the game board.
+     */
     @Override
     public void finishGame(IPlayer winner, Board board) {
-        showBoard(board);
+        showBoard(board); // Display the final state of the board.
         if (winner == null) {
-            out.announceDraw();
+            out.announceDraw(); // Announce a draw if no winner.
         } else {
-            out.announceVictory(winner.getName());
+            out.announceVictory(winner.getName()); // Announce the victory with the winner's name.
         }
-        out.goodbye();
+        out.goodbye(); // Display a goodbye message.
     }
 
+    /**
+     * Displays the current state of the board.
+     * @param board The board to be displayed.
+     */
     @Override
     public void showBoard(Board board) {
-        out.displayBoard(board.toString());
+        out.displayBoard(board.toString()); // Output the current state of the board.
     }
 }
