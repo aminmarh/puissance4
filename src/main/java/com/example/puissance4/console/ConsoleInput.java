@@ -4,6 +4,7 @@ import com.example.puissance4.hci.IInput;
 import org.springframework.stereotype.Component;
 
 import java.io.InputStream;
+import java.util.InputMismatchException;
 import java.util.Scanner;
 
 @Component
@@ -25,16 +26,25 @@ public class ConsoleInput implements IInput {
 
     @Override
     public int retrievePlayerType() {
-        return sc.nextInt();
+        try {
+            return sc.nextInt();
+        } catch (InputMismatchException e) {
+            clearInputBuffer();
+            throw new InputMismatchException();
+        }
     }
 
     @Override
     public int retrievePlayerMove() {
-        return sc.nextInt();
+        try {
+            return sc.nextInt();
+        } catch (InputMismatchException e) {
+            clearInputBuffer();
+            throw new InputMismatchException();
+        }
     }
 
-    @Override
-    public void clearInputBuffer() {
+    private void clearInputBuffer() {
         if (sc.hasNext()) {
             sc.next();
         }

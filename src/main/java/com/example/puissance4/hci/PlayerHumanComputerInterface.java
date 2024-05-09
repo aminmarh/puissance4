@@ -29,7 +29,6 @@ public class PlayerHumanComputerInterface implements IPlayerHumanComputerInterfa
                 }
             } catch (InputMismatchException e) {
                 out.alertInvalidNumber();
-                in.clearInputBuffer();
             }
         }
         return choice - 1;
