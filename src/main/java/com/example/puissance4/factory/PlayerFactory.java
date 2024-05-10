@@ -14,10 +14,10 @@ import com.example.puissance4.player.IPlayerHumanComputerInterface;
  */
 @Component
 public class PlayerFactory implements IPlayerFactory {
-    private IPlayer[] players;  // Array to store player objects
-    private int currentPlayer;  // Index to track the next available position in the players array
-    private Token[] tokens;     // Array of tokens corresponding to each player
-    private IPlayerHumanComputerInterface playerHumanComputerInterface; // Interface for player interaction
+    private IPlayer[] players;
+    private int currentPlayer;
+    private Token[] tokens;
+    private IPlayerHumanComputerInterface playerHumanComputerInterface;
 
     /**
      * Constructs a PlayerFactory with a specific interface for player interactions.

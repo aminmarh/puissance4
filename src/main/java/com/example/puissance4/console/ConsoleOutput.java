@@ -15,8 +15,8 @@ import java.util.logging.Logger;
  */
 @Component
 public class ConsoleOutput implements IOutput {
-    private MessageSource l10n;  // Source for localized messages
-    private OutputStream out;    // Stream for outputting messages to the console
+    private MessageSource l10n;
+    private OutputStream out;
 
     /**
      * Constructs a ConsoleOutput object with specified localization source and output stream.

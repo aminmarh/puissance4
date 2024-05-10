@@ -12,7 +12,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 @SpringBootApplication
 public class Puissance4Application implements CommandLineRunner {
 
-    private final Table table;  // Central game table that manages the flow of the game.
+    private final Table table;
 
     /**
      * Constructs the application with necessary game components.

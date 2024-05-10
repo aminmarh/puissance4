@@ -8,8 +8,8 @@ import com.example.puissance4.game.Token;
  * Provides common functionality and structure for all types of players (e.g., Human, AI) through the IPlayer interface.
  */
 public abstract class Player implements IPlayer {
-    private String name;  // The name of the player.
-    private Token token;  // The type of token this player uses.
+    private String name;
+    private Token token;
 
     /**
      * Constructs a player with a specified name and token type.

@@ -12,8 +12,8 @@ import java.util.InputMismatchException;
 @Component
 public class PlayerHumanComputerInterface implements IPlayerHumanComputerInterface {
 
-    private IInput in;   // Interface for handling input from the player.
-    private IOutput out; // Interface for handling output to the player.
+    private IInput in;
+    private IOutput out;
 
     /**
      * Constructs a PlayerHumanComputerInterface with specific input and output handlers.

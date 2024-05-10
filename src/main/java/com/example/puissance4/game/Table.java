@@ -8,11 +8,11 @@ import org.springframework.stereotype.Component;
  */
 @Component
 public class Table {
-    public static final int NB_JOUEURS = 2;  // Constant representing the number of players in the game.
+    public static final int NB_JOUEURS = 2;
 
-    private Board board;                    // The game board where all actions take place.
-    private IPlayer[] players;              // Array holding the two players.
-    private IHumanComputerInterface gameManager;  // Interface for managing interactions and game state.
+    private Board board;
+    private IPlayer[] players;
+    private IHumanComputerInterface gameManager;
 
     /**
      * Constructs a new game table with the necessary components to manage game play.

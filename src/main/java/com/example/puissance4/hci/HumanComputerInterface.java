@@ -16,9 +16,9 @@ import java.util.InputMismatchException;
  */
 @Component
 public class HumanComputerInterface implements IHumanComputerInterface {
-    private IPlayerFactory playerFactory; // Factory for creating player objects.
-    private IInput in;                    // Interface for handling user input.
-    private IOutput out;                  // Interface for handling user output.
+    private IPlayerFactory playerFactory;
+    private IInput in;
+    private IOutput out;
 
     /**
      * Constructs a HumanComputerInterface with necessary dependencies for managing players and interacting with users.

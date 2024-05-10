@@ -9,7 +9,7 @@ import com.example.puissance4.game.Token;
  * This class extends the abstract Player class, implementing the human-specific interaction logic for making moves on the board.
  */
 public class Human extends Player {
-    private IPlayerHumanComputerInterface app;  // Interface to facilitate human-computer interaction.
+    private IPlayerHumanComputerInterface app;
 
     /**
      * Constructs a new Human player with the specified name, token, and interaction interface.
