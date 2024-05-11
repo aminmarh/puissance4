@@ -39,6 +39,7 @@ public class HumanComputerInterface implements IHumanComputerInterface {
      */
     @Override
     public IPlayer[] initGame() {
+        playerFactory.resetPlayers();
         out.welcome(); // Display a welcome message.
         for (int i = 0; i< Table.NB_JOUEURS; i++) {
             String name;
