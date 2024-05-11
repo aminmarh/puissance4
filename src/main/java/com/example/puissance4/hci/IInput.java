@@ -33,4 +33,12 @@ public interface IInput {
      * @return An integer representing the column index where the player wants to place their token.
      */
     int retrievePlayerMove();
+
+    /**
+     * Retrieves the player's choice from the input.
+     * This method is used to read the player's choice (e.g. play or quit) from the input source.
+     *
+     * @return An integer representing the player's choice
+     */
+    int retrieveMainMenuChoice();
 }

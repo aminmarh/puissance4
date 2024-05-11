@@ -178,4 +178,16 @@ public class ConsoleOutput implements IOutput {
             Logger.getAnonymousLogger().severe(e.getMessage());
         }
     }
+
+    /**
+     * Display the menu options using localized text.
+     */
+    @Override
+    public void showMenu() {
+        try {
+            out.write(l10n.getMessage("main_menu_message", null, Locale.ENGLISH).getBytes(StandardCharsets.UTF_8));
+        } catch (Exception e) {
+            Logger.getAnonymousLogger().severe(e.getMessage());
+        }
+    }
 }
