@@ -14,12 +14,6 @@ public class Board {
      */
     public Board() {
         resetBoard();
-        this.board = new Token[ROWS][COLUMNS];
-        for (int i = 0; i < ROWS; i++) {
-            for (int j = 0; j < COLUMNS; j++) {
-                board[i][j] = Token.Empty;
-            }
-        }
     }
 
     /**
