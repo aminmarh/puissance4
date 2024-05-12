@@ -15,7 +15,7 @@ import com.example.puissance4.player.IPlayerHumanComputerInterface;
 @Component
 public class PlayerFactory implements IPlayerFactory {
     private IPlayer[] players;
-    private int currentPlayer;
+    private int currentPlayer = 0;
     private Token[] tokens;
     private IPlayerHumanComputerInterface playerHumanComputerInterface;
 
@@ -56,5 +56,15 @@ public class PlayerFactory implements IPlayerFactory {
     @Override
     public IPlayer[] getPlayers() {
         return players;
+    }
+
+    /**
+     * Resets the player creation process by setting the player index back to the start.
+     * This method is used to clear any existing player setup when reinitializing or starting a new game,
+     * ensuring that players are created from a clean state.
+     */
+    @Override
+    public void resetPlayers() {
+        currentPlayer = 0;
     }
 }

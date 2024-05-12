@@ -166,5 +166,4 @@ public class Board {
         // Return whether the simulated move can win the game.
         return canWin;
     }
-
 }

@@ -74,9 +74,28 @@ public class ConsoleInput implements IInput {
         }
     }
 
+    /**
+     * Clears the input buffer by reading the next token of input, which helps to recover from input errors.
+     */
     private void clearInputBuffer() {
         if (sc.hasNext()) {
             sc.next();
+        }
+    }
+
+    /**
+     * Retrieves a choice from the main menu, expected to be an integer. This method handles user input at the main menu level.
+     *
+     * @return The integer representing the user's choice.
+     * @throws InputMismatchException if the input provided is not an integer.
+     */
+    @Override
+    public int retrieveMainMenuChoice() {
+        try {
+            return sc.nextInt();
+        } catch (InputMismatchException e) {
+            clearInputBuffer();
+            throw new InputMismatchException();
         }
     }
 }

@@ -16,7 +16,7 @@ public interface IPlayerFactory {
      * @param name The name of the player to be created.
      * @throws InvalidPlayerTypeException If the provided type is not recognized as a valid player type.
      */
-    public void createPlayer(int type, String name) throws InvalidPlayerTypeException;
+    void createPlayer(int type, String name) throws InvalidPlayerTypeException;
 
     /**
      * Retrieves an array of all players currently managed by the factory.
@@ -24,5 +24,12 @@ public interface IPlayerFactory {
      *
      * @return An array of IPlayer instances representing all the players.
      */
-    public IPlayer[] getPlayers();
+    IPlayer[] getPlayers();
+
+    /**
+     * Resets the internal state related to player creation.
+     * Implementations should ensure that any player indices or counts are reset to their initial states.
+     * This method is typically called at the start of a new game to clear previous player configurations.
+     */
+    void resetPlayers();
 }

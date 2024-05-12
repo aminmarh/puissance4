@@ -64,4 +64,10 @@ public interface IOutput {
      * @param name The name of the player whose turn it is to play.
      */
     void callPlayer(String name);
+
+    /**
+     * Displays the main menu with options such as starting a new game or exiting.
+     * This method should clearly articulate the choices available to the user and how to select them.
+     */
+    void showMenu();
 }
