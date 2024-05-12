@@ -28,6 +28,7 @@ public class Table {
      * checks for game ending conditions, and coordinates with the game manager to handle game events.
      */
     public void play() {
+        resetTable();
         this.players = gameManager.initGame();  // Initialize the game and players.
 
         // Game loop continues until a break condition is met (win or draw).
@@ -49,5 +50,12 @@ public class Table {
                 }
             }
         }
+    }
+
+    /**
+     * Resets the entire table, including the board and player setup.
+     */
+    public void resetTable() {
+        board.resetBoard();
     }
 }

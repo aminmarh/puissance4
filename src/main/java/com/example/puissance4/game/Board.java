@@ -13,6 +13,7 @@ public class Board {
      * Initializes an empty game board with all slots set to Token.Empty.
      */
     public Board() {
+        resetBoard();
         this.board = new Token[ROWS][COLUMNS];
         for (int i = 0; i < ROWS; i++) {
             for (int j = 0; j < COLUMNS; j++) {
@@ -165,6 +166,18 @@ public class Board {
 
         // Return whether the simulated move can win the game.
         return canWin;
+    }
+
+    /**
+     * Resets the game board to its initial empty state.
+     */
+    public void resetBoard() {
+        board = new Token[ROWS][COLUMNS];
+        for (int i = 0; i < ROWS; i++) {
+            for (int j = 0; j < COLUMNS; j++) {
+                board[i][j] = Token.Empty;
+            }
+        }
     }
 
 }
