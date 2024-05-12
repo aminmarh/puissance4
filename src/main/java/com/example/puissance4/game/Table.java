@@ -39,15 +39,18 @@ public class Table {
 
                 // Check if the current player's move resulted in a win.
                 if (this.board.isWon()) {
+                    gameManager.clearConsole();         // Clear the console after each move.
                     gameManager.finishGame(player, this.board);  // End the game with a winner.
                     return;  // Exit the game loop.
                 }
 
                 // Check if the board is full and no more moves can be made (draw).
                 if (this.board.isFull()) {
+                    gameManager.clearConsole();         // Clear the console after each move.
                     gameManager.finishGame(null, this.board);  // End the game with a draw.
                     return;  // Exit the game loop.
                 }
+
             }
         }
     }

@@ -7,6 +7,7 @@ import org.springframework.stereotype.Component;
 import java.io.IOException;
 import java.io.OutputStream;
 import java.nio.charset.StandardCharsets;
+import java.util.Arrays;
 import java.util.Locale;
 import java.util.logging.Logger;
 
@@ -18,6 +19,17 @@ import java.util.logging.Logger;
 public class ConsoleOutput implements IOutput {
     private MessageSource l10n;
     private OutputStream out;
+    private static final ProcessBuilder CLEANER_PROCESS;
+
+    static {
+        // Determine the correct command based on OS just once
+        String os = System.getProperty("os.name");
+        if (os.contains("Windows")) {
+            CLEANER_PROCESS = new ProcessBuilder("cmd", "/c", "cls").inheritIO();
+        } else {
+            CLEANER_PROCESS = new ProcessBuilder("clear").inheritIO();
+        }
+    }
 
     /**
      * Constructs a ConsoleOutput object with specified localization source and output stream.
@@ -198,36 +210,25 @@ public class ConsoleOutput implements IOutput {
     @Override
     public void clearConsole() {
         try {
-            String operatingSystem = System.getProperty("os.name"); // Check the current operating system
-
-            if (operatingSystem.contains("Windows")) {
-                // Clears console for Windows
-                new ProcessBuilder("cmd", "/c", "cls").inheritIO().start().waitFor();
-            } else {
-                // Clears console for Unix, Linux, Mac using 'clear' command
-                new ProcessBuilder("clear").inheritIO().start().waitFor();
-            }
+            CLEANER_PROCESS.start().waitFor();
         } catch (IOException e) {
-            String errorMessage = l10n.getMessage("clear_console_error_io", null, Locale.ENGLISH) + e.getMessage();
             try {
-                out.write(errorMessage.getBytes(StandardCharsets.UTF_8));
+                out.write((l10n.getMessage("clear_console_error_io", null, Locale.ENGLISH) + Arrays.toString(e.getMessage().getBytes(StandardCharsets.UTF_8))).getBytes());
                 out.write("\n".getBytes(StandardCharsets.UTF_8));
             } catch (IOException ioException) {
                 Logger.getAnonymousLogger().severe(ioException.getMessage());
             }
         } catch (InterruptedException e) {
-            String errorMessage = l10n.getMessage("clear_console_error_interrupted", null, Locale.ENGLISH) + e.getMessage();
             try {
-                out.write(errorMessage.getBytes(StandardCharsets.UTF_8));
+                out.write((l10n.getMessage("clear_console_error_interrupted", null, Locale.ENGLISH) + Arrays.toString(e.getMessage().getBytes(StandardCharsets.UTF_8))).getBytes());
                 out.write("\n".getBytes(StandardCharsets.UTF_8));
             } catch (IOException ioException) {
                 Logger.getAnonymousLogger().severe(ioException.getMessage());
             }
             Thread.currentThread().interrupt(); // Restore interrupt status
         } catch (Exception e) {
-            String errorMessage = l10n.getMessage("clear_console_error_unexpected", null, Locale.ENGLISH) + e.getMessage();
             try {
-                out.write(errorMessage.getBytes(StandardCharsets.UTF_8));
+                out.write((l10n.getMessage("clear_console_error_unexpected", null, Locale.ENGLISH) + Arrays.toString(e.getMessage().getBytes(StandardCharsets.UTF_8))).getBytes());
                 out.write("\n".getBytes(StandardCharsets.UTF_8));
             } catch (IOException ioException) {
                 Logger.getAnonymousLogger().severe(ioException.getMessage());
