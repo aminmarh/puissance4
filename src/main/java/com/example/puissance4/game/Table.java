@@ -19,7 +19,6 @@ public class Table {
      * @param gameManager The interface implementation that handles player interactions and game progression.
      */
     public Table(IHumanComputerInterface gameManager) {
-        this.board = new Board();           // Initialize a new game board.
         this.gameManager = gameManager;     // Set the game manager.
     }
 
@@ -28,7 +27,7 @@ public class Table {
      * checks for game ending conditions, and coordinates with the game manager to handle game events.
      */
     public void play() {
-        resetTable();
+        this.board = new Board();
         this.players = gameManager.initGame();  // Initialize the game and players.
 
         // Game loop continues until a break condition is met (win or draw).
@@ -50,12 +49,5 @@ public class Table {
                 }
             }
         }
-    }
-
-    /**
-     * Resets the entire table, including the board and player setup.
-     */
-    public void resetTable() {
-        board.resetBoard();
     }
 }
