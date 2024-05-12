@@ -1,7 +1,6 @@
-package com.example.puissance4.game;
+package com.example.puissance4.hci;
 
-import com.example.puissance4.hci.IInput;
-import com.example.puissance4.hci.IOutput;
+import com.example.puissance4.game.Table;
 import org.springframework.stereotype.Component;
 
 import java.util.InputMismatchException;
@@ -11,7 +10,7 @@ import java.util.InputMismatchException;
  * It controls the game flow including menu display, game initiation, and application termination.
  */
 @Component
-public class GameController {
+public class Menu {
     private final IInput input;
     private final IOutput output;
     private final Table table;
@@ -23,7 +22,7 @@ public class GameController {
      * @param output The output handler for displaying information to the user.
      * @param table  The main game logic handler, responsible for managing gameplay.
      */
-    public GameController(IInput input, IOutput output, Table table) {
+    public Menu(IInput input, IOutput output, Table table) {
         this.input = input;
         this.output = output;
         this.table = table;

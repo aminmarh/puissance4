@@ -4,7 +4,7 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.beans.factory.annotation.Autowired;
-import com.example.puissance4.game.GameController;
+import com.example.puissance4.hci.Menu;
 
 /**
  * Spring Boot application for the Puissance 4 (Connect Four) game.
@@ -14,7 +14,7 @@ import com.example.puissance4.game.GameController;
 public class Puissance4Application implements CommandLineRunner {
 
     @Autowired
-    private GameController gameController;
+    private Menu menu;
 
     /**
      * The main method that serves as the entry point for the Spring Boot application.
@@ -33,6 +33,6 @@ public class Puissance4Application implements CommandLineRunner {
      */
     @Override
     public void run(String... args) throws Exception {
-        gameController.startApplication();
+        menu.startApplication();
     }
 }
