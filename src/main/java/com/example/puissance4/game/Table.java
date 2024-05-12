@@ -33,6 +33,7 @@ public class Table {
         // Game loop continues until a break condition is met (win or draw).
         while (true) {
             for (IPlayer player : players) {
+                gameManager.clearConsole();         // Clear the console after each move.
                 gameManager.showBoard(this.board);  // Display the current state of the board.
                 player.play(this.board);            // Current player makes a move.
 

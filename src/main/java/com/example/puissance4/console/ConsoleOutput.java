@@ -4,6 +4,7 @@ import com.example.puissance4.hci.IOutput;
 import org.springframework.context.MessageSource;
 import org.springframework.stereotype.Component;
 
+import java.io.IOException;
 import java.io.OutputStream;
 import java.nio.charset.StandardCharsets;
 import java.util.Locale;
@@ -188,6 +189,49 @@ public class ConsoleOutput implements IOutput {
             out.write(l10n.getMessage("main_menu_message", null, Locale.ENGLISH).getBytes(StandardCharsets.UTF_8));
         } catch (Exception e) {
             Logger.getAnonymousLogger().severe(e.getMessage());
+        }
+    }
+
+    /**
+     * Clears the console output after every player move.
+     */
+    @Override
+    public void clearConsole() {
+        try {
+            String operatingSystem = System.getProperty("os.name"); // Check the current operating system
+
+            if (operatingSystem.contains("Windows")) {
+                // Clears console for Windows
+                new ProcessBuilder("cmd", "/c", "cls").inheritIO().start().waitFor();
+            } else {
+                // Clears console for Unix, Linux, Mac using 'clear' command
+                new ProcessBuilder("clear").inheritIO().start().waitFor();
+            }
+        } catch (IOException e) {
+            String errorMessage = l10n.getMessage("clear_console_error_io", null, Locale.ENGLISH) + e.getMessage();
+            try {
+                out.write(errorMessage.getBytes(StandardCharsets.UTF_8));
+                out.write("\n".getBytes(StandardCharsets.UTF_8));
+            } catch (IOException ioException) {
+                Logger.getAnonymousLogger().severe(ioException.getMessage());
+            }
+        } catch (InterruptedException e) {
+            String errorMessage = l10n.getMessage("clear_console_error_interrupted", null, Locale.ENGLISH) + e.getMessage();
+            try {
+                out.write(errorMessage.getBytes(StandardCharsets.UTF_8));
+                out.write("\n".getBytes(StandardCharsets.UTF_8));
+            } catch (IOException ioException) {
+                Logger.getAnonymousLogger().severe(ioException.getMessage());
+            }
+            Thread.currentThread().interrupt(); // Restore interrupt status
+        } catch (Exception e) {
+            String errorMessage = l10n.getMessage("clear_console_error_unexpected", null, Locale.ENGLISH) + e.getMessage();
+            try {
+                out.write(errorMessage.getBytes(StandardCharsets.UTF_8));
+                out.write("\n".getBytes(StandardCharsets.UTF_8));
+            } catch (IOException ioException) {
+                Logger.getAnonymousLogger().severe(ioException.getMessage());
+            }
         }
     }
 }

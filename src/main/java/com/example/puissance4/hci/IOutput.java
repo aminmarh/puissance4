@@ -70,4 +70,9 @@ public interface IOutput {
      * This method should clearly articulate the choices available to the user and how to select them.
      */
     void showMenu();
+
+    /**
+     * Clears the console after every player move.
+     */
+    void clearConsole();
 }

@@ -94,4 +94,12 @@ public class HumanComputerInterface implements IHumanComputerInterface {
     public void showBoard(Board board) {
         out.displayBoard(board.toString()); // Output the current state of the board.
     }
+
+    /**
+     * Clears the console after every player move.
+     */
+    @Override
+    public void clearConsole() {
+        out.clearConsole();
+    }
 }
