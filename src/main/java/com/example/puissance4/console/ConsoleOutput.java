@@ -61,9 +61,7 @@ public class ConsoleOutput implements IOutput {
         } catch (Exception e) {
             Logger.getAnonymousLogger().severe(e.getMessage());
         }
-
     }
-
 
     /**
      * Displays a welcome message to the user.

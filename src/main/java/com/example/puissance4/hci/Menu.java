@@ -63,7 +63,6 @@ public class Menu {
     public void startApplication() {
         boolean running = true;
         while (running) {
-
             try {
                 out.showMenu();
                 int choice = in.retrieveMainMenuChoice();

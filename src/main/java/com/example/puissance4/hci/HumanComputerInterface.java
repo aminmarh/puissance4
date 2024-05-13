@@ -28,7 +28,6 @@ public class HumanComputerInterface implements IHumanComputerInterface {
      * @param in The input handler for obtaining user input.
      * @param out The output handler for sending information to the user.
      */
-
     public HumanComputerInterface(IPlayerFactory playerFactory, IInput in, IOutput out) {
         this.playerFactory = playerFactory;
         this.in = in;
