@@ -1,5 +1,7 @@
 package com.example.puissance4.hci;
 
+import java.util.Locale;
+
 /**
  * Defines the interface for output operations in the Puissance 4 game.
  * This interface specifies methods required to communicate game-related information to players,
@@ -75,4 +77,7 @@ public interface IOutput {
      * Refresh the human computer interface after every player move.
      */
     void refreshInterface();
+
+    void selectLanguage();
+    void setLanguage(Locale newLanguage);
 }

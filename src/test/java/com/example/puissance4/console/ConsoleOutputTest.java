@@ -21,6 +21,8 @@ class ConsoleOutputTest {
 
     private ConsoleOutput consoleOutput;
 
+    private String language;
+
     @BeforeEach
     void setUp() {
         MockitoAnnotations.openMocks(this);

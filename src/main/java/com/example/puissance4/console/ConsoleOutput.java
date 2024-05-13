@@ -15,9 +15,12 @@ import java.util.logging.Logger;
  */
 @Component
 public class ConsoleOutput implements IOutput {
+
     private MessageSource l10n;
     private OutputStream out;
+    private  Locale language;
     private static final ProcessBuilder CLEANER_PROCESS;
+
 
     static {
         // Determine the correct command based on OS just once
@@ -29,6 +32,8 @@ public class ConsoleOutput implements IOutput {
         }
     }
 
+
+
     /**
      * Constructs a ConsoleOutput object with specified localization source and output stream.
      * @param l10n MessageSource for localization
@@ -37,7 +42,24 @@ public class ConsoleOutput implements IOutput {
     public ConsoleOutput(MessageSource l10n, OutputStream out) {
         this.l10n = l10n;
         this.out = out;
+        this.language= Locale.ENGLISH;
     }
+
+
+    public void selectLanguage(){
+        try {
+            out.write(l10n.getMessage("choice_language", null, this.language).getBytes(StandardCharsets.UTF_8));
+            out.write("\n".getBytes(StandardCharsets.UTF_8));
+        } catch (Exception e) {
+            Logger.getAnonymousLogger().severe(e.getMessage());
+        }
+
+    }
+
+    public void setLanguage(Locale newLanguage) {
+        this.language = newLanguage;
+    }
+
 
     /**
      * Displays a welcome message to the user.
@@ -46,7 +68,7 @@ public class ConsoleOutput implements IOutput {
     public void welcome() {
         try {
             // Write the localized welcome message to the output stream.
-            out.write(l10n.getMessage("welcome_message", null, Locale.ENGLISH).getBytes(StandardCharsets.UTF_8));
+            out.write(l10n.getMessage("welcome_message", null, this.language).getBytes(StandardCharsets.UTF_8));
             out.write("\n".getBytes(StandardCharsets.UTF_8));
         } catch (Exception e) {
             Logger.getAnonymousLogger().severe(e.getMessage());
@@ -60,7 +82,7 @@ public class ConsoleOutput implements IOutput {
     public void askPlayerName() {
         try {
             // Request player name using localized text.
-            out.write(l10n.getMessage("player_name", null, Locale.ENGLISH).getBytes(StandardCharsets.UTF_8));
+            out.write(l10n.getMessage("player_name", null, this.language).getBytes(StandardCharsets.UTF_8));
         } catch (Exception e) {
             Logger.getAnonymousLogger().severe(e.getMessage());
         }
@@ -73,7 +95,7 @@ public class ConsoleOutput implements IOutput {
     public void askPlayerType() {
         try {
             // Request player type using localized text.
-            out.write(l10n.getMessage("player_type", null, Locale.ENGLISH).getBytes(StandardCharsets.UTF_8));
+            out.write(l10n.getMessage("player_type", null, this.language).getBytes(StandardCharsets.UTF_8));
         } catch (Exception e) {
             Logger.getAnonymousLogger().severe(e.getMessage());
         }
@@ -86,7 +108,7 @@ public class ConsoleOutput implements IOutput {
     public void alertInvalidNumber() {
         try {
             // Notify user of the number input error using a localized message.
-            out.write(l10n.getMessage("number_error", null, Locale.ENGLISH).getBytes(StandardCharsets.UTF_8));
+            out.write(l10n.getMessage("number_error", null, this.language).getBytes(StandardCharsets.UTF_8));
         } catch (Exception e) {
             Logger.getAnonymousLogger().severe(e.getMessage());
         }
@@ -99,7 +121,7 @@ public class ConsoleOutput implements IOutput {
     public void alertInvalidPlayerType() {
         try {
             // Inform the user of an invalid player type selection using a localized message.
-            out.write(l10n.getMessage("invalid_player_type", null, Locale.ENGLISH).getBytes(StandardCharsets.UTF_8));
+            out.write(l10n.getMessage("invalid_player_type", null, this.language).getBytes(StandardCharsets.UTF_8));
         } catch (Exception e) {
             Logger.getAnonymousLogger().severe(e.getMessage());
         }
@@ -127,7 +149,7 @@ public class ConsoleOutput implements IOutput {
     public void alertInvalidColumn() {
         try {
             // Notify user of an invalid column selection using a localized message.
-            out.write(l10n.getMessage("invalid_column", null, Locale.ENGLISH).getBytes(StandardCharsets.UTF_8));
+            out.write(l10n.getMessage("invalid_column", null, this.language).getBytes(StandardCharsets.UTF_8));
         } catch (Exception e) {
             Logger.getAnonymousLogger().severe(e.getMessage());
         }
@@ -140,7 +162,7 @@ public class ConsoleOutput implements IOutput {
     public void announceDraw() {
         try {
             // Communicate a draw situation using a localized message.
-            out.write(l10n.getMessage("draw_message", null, Locale.ENGLISH).getBytes(StandardCharsets.UTF_8));
+            out.write(l10n.getMessage("draw_message", null, this.language).getBytes(StandardCharsets.UTF_8));
             out.write("\n".getBytes(StandardCharsets.UTF_8));
         } catch (Exception e) {
             Logger.getAnonymousLogger().severe(e.getMessage());
@@ -155,7 +177,7 @@ public class ConsoleOutput implements IOutput {
     public void announceVictory(String winner) {
         try {
             // Announce the winner using a formatted localized message.
-            out.write(l10n.getMessage("victory_message", new Object[]{winner}, Locale.ENGLISH).getBytes(StandardCharsets.UTF_8));
+            out.write(l10n.getMessage("victory_message", new Object[]{winner}, this.language).getBytes(StandardCharsets.UTF_8));
             out.write("\n".getBytes(StandardCharsets.UTF_8));
         } catch (Exception e) {
             Logger.getAnonymousLogger().severe(e.getMessage());
@@ -169,7 +191,7 @@ public class ConsoleOutput implements IOutput {
     public void goodbye() {
         try {
             // Send off the user with a goodbye message using localized text.
-            out.write(l10n.getMessage("goodbye_message", null, Locale.ENGLISH).getBytes(StandardCharsets.UTF_8));
+            out.write(l10n.getMessage("goodbye_message", null, this.language).getBytes(StandardCharsets.UTF_8));
         } catch (Exception e) {
             Logger.getAnonymousLogger().severe(e.getMessage());
         }
@@ -183,7 +205,7 @@ public class ConsoleOutput implements IOutput {
     public void callPlayer(String name) {
         try {
             // Prompt the specified player to make a move using localized text.
-            out.write(l10n.getMessage("player_prompt", new Object[]{name}, Locale.ENGLISH).getBytes(StandardCharsets.UTF_8));
+            out.write(l10n.getMessage("player_prompt", new Object[]{name},this.language).getBytes(StandardCharsets.UTF_8));
             out.write("\n".getBytes(StandardCharsets.UTF_8));
         } catch (Exception e) {
             Logger.getAnonymousLogger().severe(e.getMessage());
@@ -196,7 +218,7 @@ public class ConsoleOutput implements IOutput {
     @Override
     public void showMenu() {
         try {
-            out.write(l10n.getMessage("main_menu_message", null, Locale.ENGLISH).getBytes(StandardCharsets.UTF_8));
+            out.write(l10n.getMessage("main_menu_message", null, this.language).getBytes(StandardCharsets.UTF_8));
         } catch (Exception e) {
             Logger.getAnonymousLogger().severe(e.getMessage());
         }

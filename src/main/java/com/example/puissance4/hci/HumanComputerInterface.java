@@ -9,6 +9,7 @@ import com.example.puissance4.game.Table;
 import org.springframework.stereotype.Component;
 
 import java.util.InputMismatchException;
+import java.util.Locale;
 
 /**
  * Implements the IHumanComputerInterface to manage interactions between the game's human and computer elements.
@@ -20,16 +21,19 @@ public class HumanComputerInterface implements IHumanComputerInterface {
     private IInput in;
     private IOutput out;
 
+
     /**
      * Constructs a HumanComputerInterface with necessary dependencies for managing players and interacting with users.
      * @param playerFactory The factory responsible for creating and managing players.
      * @param in The input handler for obtaining user input.
      * @param out The output handler for sending information to the user.
      */
+
     public HumanComputerInterface(IPlayerFactory playerFactory, IInput in, IOutput out) {
         this.playerFactory = playerFactory;
         this.in = in;
         this.out = out;
+
     }
 
     /**
