@@ -1,9 +1,9 @@
 [English](README.md) | [Français](README.fr.md)
-# Puissance 4
+# Connect Four
 
-Bienvenue sur le repository GitHub de **Puissance 4**. Ce projet vise à reproduire un jeu de Puissance 4 sur console.
+Welcome to the GitHub repository for **Connect Four**. This project aims to replicate a Connect Four game on console.
 
-## Membres de l'équipe
+## Team Members
 
 - [Seghdau Yanis](https://github.com/YanisGlg95)
 - [Marheraroui Amin](https://github.com/aminmarh)
@@ -11,93 +11,93 @@ Bienvenue sur le repository GitHub de **Puissance 4**. Ce projet vise à reprodu
 - [Ibouda Yasser](https://github.com/Yasser1080)
 - [Souissi Dhia-Eddine](https://github.com/Dhia78)
 
-## Prérequis
+## Prerequisites
 
-Pour exécuter ce projet, vous aurez besoin des outils suivants installés sur votre machine :
+To run this project, you will need the following tools installed on your machine:
 
-- **[Java JDK 21](https://www.oracle.com/fr/java/technologies/downloads/#java21)** : Assurez-vous d'avoir Java JDK 21 installé pour exécuter le code source. Vous pouvez vérifier cela en tapant `java --version` dans votre terminal.
+- **[Java JDK 21](https://www.oracle.com/fr/java/technologies/downloads/#java21)**: Make sure you have Java JDK 21 installed to execute the source code. You can verify this by typing `java --version` in your terminal.
 
-- **[Maven](https://maven.apache.org/download.cgi)** : Maven est utilisé pour la gestion des dépendances et pour automatiser le build de l'application. Assurez-vous que Maven est installé sur votre système. Vous pouvez vérifier cela en tapant `mvn --version` dans votre terminal.
-## Clonage du projet
+- **[Maven](https://maven.apache.org/download.cgi)**: Maven is used for dependency management and to automate the building of the application. Ensure that Maven is installed on your system. You can check this by typing `mvn --version` in your terminal.
+## Cloning the Project
 
-Pour obtenir une copie du projet sur votre machine locale pour le développement et les tests, suivez ces étapes :
+To get a copy of the project on your local machine for development and testing, follow these steps:
 
-1. Ouvrez un terminal.
-2. Changez le répertoire courant en un emplacement où vous souhaitez cloner le répertoire.
-3. Tapez la commande suivante pour cloner le dépôt Git :
+1. Open a terminal.
+2. Change the current directory to a location where you want to clone the repository.
+3. Type the following command to clone the Git repository:
    ```bash
    git clone https://github.com/aminmarh/puissance4.git
    ```
-4. Après avoir cloné le dépôt, changez le répertoire courant en `puissance4` :
-   ```bash
-    cd puissance4
+4. After cloning the repository, change the current directory to `power4`:
+    ```bash
+     cd puissance4
+     ```
+5. You are ready to execute the project!
+
+## Project launch
+
+To start the project, follow the instructions below:
+
+1. Build the project with Maven to generate the executable. In the project root directory, run:
+    ```bash
+    mvn clean package
     ```
-5. Vous êtes prêt à exécuter le projet !
+   This command will generate a .jar file in the target directory.
 
-## Lancement du projet
+2. Run the application using the generated JAR file. Make sure you are still in the project root directory and type:
+    ```bash
+    java -jar target/puissance4-0.0.1-SNAPSHOT.jar
+    ```
+   This command will start the application in console mode, ready to play.
 
-Pour lancer le projet, suivez les instructions ci-dessous :
+## Using Docker
 
-1. Construisez le projet avec Maven pour générer l'exécutable. Dans le répertoire racine du projet, exécutez :
-   ```bash
-   mvn clean package
-   ```
-   Cette commande générera un fichier .jar dans le répertoire target.
+If you prefer to use Docker to run the application, make sure that Docker is installed on your machine. Then follow these steps to build the Docker image and run the container:
 
-2. Exécutez l'application en utilisant le fichier JAR généré. Assurez-vous d'être toujours dans le répertoire racine du projet et tapez :
-   ```bash
-   java -jar target/puissance4-0.0.1-SNAPSHOT.jar
-   ```
-   Cette commande démarrera l'application en mode console, prête à jouer.
+1. Build the Docker image:
+    ```bash
+    docker build -t puissance4 .
+    ```
+2. Once the image is built, launch the application in a Docker container:
+    ```bash
+    docker run -it puissance4
+    ```
+   This will launch the application in a Docker container, where you can play the game in console mode.
 
-## Utilisation de Docker
+## Features
 
-Si vous préférez utiliser Docker pour exécuter l'application, assurez-vous que Docker est installé sur votre machine. Ensuite, suivez ces étapes pour construire l'image Docker et exécuter le conteneur :
+Our application allows you to play the game of Puissance 4 on console. Here's how to play it:
 
-1. Construisez l'image Docker :
-   ```bash
-   docker build -t puissance4 .
-   ```
-2. Une fois l'image construite, lancez l'application dans un conteneur Docker: 
-   ```bash
-   docker run -it puissance4
-   ```
-   Cela lancera l'application dans un conteneur Docker, où vous pourrez jouer au jeu en mode console.
+- **Choice of game mode**: At the start of the game, you can choose to play against another player or against an AI (or have 2 AI play). You must then give the names of the players.
 
-## Fonctionnalités
+- **Entering the column**: To play a move, the console will prompt you to enter the number of the column in which you want to place your token. The column must be an integer between 1 and 7.
 
-Notre application permet de jouer au jeu de Puissance 4 sur console. Voici comment y jouer :
+- **End of the game**: The game ends when a player aligns 4 tokens horizontally, vertically or diagonally. If the grid is full and no player has lined up 4 tokens, the game ends in a draw.
 
-- **Choix du mode de jeu** : Au début de la partie, vous pouvez choisir de jouer contre un autre joueur ou contre une IA (ou alors faire jouer 2 IA). Vous devez alors donner le nom des joueurs.
+## Project organisation
 
-- **Saisie de la colonne** : Pour jouer un coup, la console vous invitera à saisir le numéro de la colonne dans laquelle vous voulez placer votre jeton. La colonne doit être un nombre entier compris entre 1 et 7.
+During the development of this project, we used several tools and methods to facilitate collaboration and code management. Here are some tools and methods we used:
 
-- **Fin de la partie** : La partie se termine lorsqu'un joueur aligne 4 jetons horizontalement, verticalement ou diagonalement. Si la grille est pleine et qu'aucun joueur n'a aligné 4 jetons, la partie se termine par un match nul.
+- **Trello**: We chose Trello for monitoring the progress of the project. We create a ticket with specifications to integrate a new feature or resolve an issue in our application. This ticket is then assigned to a member of the team who is responsible for carrying it out. Once the ticket is completed, it is moved to the "Done" column to indicate that it is complete. Here is the link to our Trello board: [Trello](https://trello.com/invite/b/YfXafSrf/ATTI017cd0e8e341ace6cc525a3377692bf3BE2850FF/projet-peut-4)
 
-## Organisation du projet
+- **Discord**: We used Discord to communicate in real time. We created a Discord server for our team and used the text channels to discuss the progress of the project and any issues encountered. We also used voice channels to hold meetings and discuss more complex issues.
 
-Au cours du développement de ce projet, nous avons utilisé plusieurs outils et méthodes pour faciliter la collaboration et la gestion du code. Voici quelques outils et méthodes que nous avons utilisés :
+- **Github**: Versioning was carried out on Github, a tool whose knowledge and use varies according to each member. For the integration of the new code, Pull Requests were made and verified by each member before being Merged onto the Master branch. A GitHub Actions WorkFlow has been set up on our repository to allow better code integration. When you merge a Pull Request on the Master branch, tests are run automatically to ensure that the published code works as expected.
 
-- **Trello** : Nous avons choisi Trello pour le suivi de l'avancement du projet. Nous créons un ticket avec des spécifications pour intégrer une nouvelle fonctionnalité ou résoudre un problème de notre application. Ce ticket est ensuite assigné à un membre de l'équipe qui se charge de le réaliser. Une fois le ticket terminé, il est déplacé dans la colonne "Fait" pour indiquer qu'il est terminé. Voici le lien vers notre tableau Trello : [Trello](https://trello.com/invite/b/YfXafSrf/ATTI017cd0e8e341ace6cc525a3377692bf3BE2850FF/projet-puissance-4)
-
-- **Discord** : Nous avons utilisé Discord pour communiquer en temps réel. Nous avons créé un serveur Discord pour notre équipe et nous avons utilisé les canaux textuels pour discuter de l'avancement du projet et des problèmes rencontrés. Nous avons également utilisé les canaux vocaux pour organiser des réunions et discuter de questions plus complexes.
-
-- **Github** : Le versioning a été effectué sur Github, un outil dont la connaissane et l'utilisation varie selon chaque membre. Pour l'intégration du nouveau code, des Pull Requests ont été effectuées et vérifiées par chacun des membres avant d'être Merge sur la branche Master. Un WorkFlow GitHub Actions a été mis en place sur notre repository pour permettre une meilleure intégration du code. Lorsque l'on Merge une Pull Request sur la branche Master, les tests sont executés automatiquement afin de s'assurer que le code publié fonctionne comme prévu.
-
-- **IntelliJ** : L'ensemble de l'équipe a travaillé sur IntelliJ et parfois nous avons utilisé la fonctionnalité "Code With Me" afin de faire du pair programming. De plus nous avons utilisé le plugin SonarLint pour analyser la qualité du code et détécter les mauvaises pratiques.
+- **IntelliJ**: The entire team worked on IntelliJ and sometimes we used the "Code With Me" functionality to do pair programming. In addition, we used the SonarLint plugin to analyze the quality of the code and detect bad practices.
 
 
 
-## Difficultés Rencontrées
+## Encountered difficulties
 
-Au cours du développement de ce projet, nous avons rencontré plusieurs défis :
+During the development of this project, we encountered several challenges:
 
-- **Injections de dépendances** : Nous avons eu du mal à comprendre quels composants de notre application devaient être injectés et comment les injecter correctement. Nous nous sommes donc référés à notre diagramme de classes pour savoir quels composants devaient être injectés.
+- **Dependency injections**: We had difficulty understanding which components of our application should be injected and how to inject them correctly. So we referred to our class diagram to find out which components should be injected.
 
-- **Gestion des entrées utilisateur et des sorties console** : Nous avons eu du mal à gérer les entrées et sorties en respectant les bonnes pratiques Java. En effet, nous avons eu des diffcultés vis à vis des erreurs de saisie de l'utilisateur et des messages à afficher en prenant compte l'internationalisation.
+- **Management of user input and console output**: We had difficulty managing input and output while respecting Java best practices. Indeed, we had difficulties with user input errors and messages to display while taking internationalization into account.
 
-- **Algorithme de joueur IA** : Nous avons eu du mal à comprendre et implémenter un algorithme de la famille Minimax pour la création d'une IA. Nous avons donc décidé de créer une IA simple qui choisit une colonne semi-aléatoirement en bloquant les coups gagnants de l'adversaire et en essayant de gagner si elle en a l'occasion.
+- **AI player algorithm**: We had difficulty understanding and implementing an algorithm from the Minimax family for creating an AI. So we decided to create a simple AI that chooses a column semi-randomly by blocking the opponent's winning moves and trying to win if it gets the chance.
 
-## Bilan
+## Assessment
 
-Ce projet nous a permis de mettre en pratique les concepts que nous avons appris en cours. Nous avons pu travailler en équipe et utiliser des outils de gestion de projet pour faciliter la collaboration. Nous avons également pu améliorer nos compétences en conception et architecture afin de créer une application bien structurée et facile à maintenir.
+This project allowed us to put into practice the concepts we learned in class. We were able to work as a team and use project management tools to facilitate collaboration. We were also able to improve our design and architecture skills to create a well-structured and easy-to-maintain application.
