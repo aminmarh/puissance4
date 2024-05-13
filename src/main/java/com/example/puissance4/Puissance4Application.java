@@ -1,10 +1,9 @@
 package com.example.puissance4;
 
+import com.example.puissance4.hci.IMenu;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.beans.factory.annotation.Autowired;
-import com.example.puissance4.hci.Menu;
 
 /**
  * Spring Boot application for the Puissance 4 (Connect Four) game.
@@ -13,8 +12,15 @@ import com.example.puissance4.hci.Menu;
 @SpringBootApplication
 public class Puissance4Application implements CommandLineRunner {
 
-    @Autowired
-    private Menu menu;
+    private final IMenu menu;
+
+    /**
+     * Constructs a Puissance4Application with a menu interface for handling user interactions.
+     * @param menu The menu interface for managing user interactions off the game.
+     */
+    public Puissance4Application(IMenu menu) {
+        this.menu = menu;
+    }
 
     /**
      * The main method that serves as the entry point for the Spring Boot application.

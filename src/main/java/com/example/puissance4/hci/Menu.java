@@ -1,6 +1,5 @@
 package com.example.puissance4.hci;
 
-import com.example.puissance4.console.ConsoleOutput;
 import com.example.puissance4.game.Table;
 import org.springframework.stereotype.Component;
 
@@ -12,11 +11,10 @@ import java.util.Locale;
  * It controls the game flow including menu display, game initiation, and application termination.
  */
 @Component
-public class Menu {
+public class Menu implements IMenu {
     private final IInput in;
     private final IOutput out;
     private final Table table;
-    private Locale language;
 
     /**
      * Constructs a GameController with dependencies for input, output, and game table.
@@ -37,27 +35,25 @@ public class Menu {
      * It handles user input to select between supported languages and provides feedback for invalid choices.
      *
      * @param out The output handler used for displaying language options and alerts.
-     * @return The selected Locale object representing the chosen language, or null if the operation is cancelled.
-     * @throws InputMismatchException if non-numeric input is received.
      */
-    public Locale initLanguage(IOutput out) {
-        int nb = 0;
+    private void initLanguage(IOutput out) {
         while (true) {
             out.selectLanguage();
             try {
-                nb = in.retrieveLanguage();
-                if (nb == 1) {
-                    out.setLanguage(Locale.ENGLISH);
-                    return Locale.ENGLISH;
-                } else if (nb == 2) {
-                    out.setLanguage(Locale.FRENCH);
-                    return Locale.FRENCH;
-                }
-                else if (nb==3){
-                    return null;
-                }
-                else {
-                    out.alertLanguageError();
+                int nb = in.retrieveLanguage();
+                switch (nb) {
+                    case 1 -> {
+                        out.setLanguage(Locale.ENGLISH);
+                        return;
+                    }
+                    case 2 -> {
+                        out.setLanguage(Locale.FRENCH);
+                        return;
+                    }
+                    case 3 -> {
+                        return;
+                    }
+                    default -> out.alertLanguageError();
                 }
             } catch (InputMismatchException e) {
                 out.alertInvalidNumber();
@@ -69,6 +65,7 @@ public class Menu {
      * Starts the application's main loop, handling menu selections and delegating game operations.
      * It repeatedly displays the menu, processes the user input, and manages game states based on user interaction.
      */
+    @Override
     public void startApplication() {
         boolean running = true;
         while (running) {
