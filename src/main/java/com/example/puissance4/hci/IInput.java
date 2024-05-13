@@ -41,4 +41,12 @@ public interface IInput {
      * @return An integer representing the player's choice
      */
     int retrieveMainMenuChoice();
+
+    /**
+     * Retrieves the player's choice from the input.
+     * This method retrieve the number for the choice of language
+     *
+     * @return An integer representing the player's choice language
+     */
+    int retrieveLanguage();
 }

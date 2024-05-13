@@ -9,6 +9,7 @@ import com.example.puissance4.game.Table;
 import org.springframework.stereotype.Component;
 
 import java.util.InputMismatchException;
+import java.util.Locale;
 
 /**
  * Implements the IHumanComputerInterface to manage interactions between the game's human and computer elements.
