@@ -33,4 +33,9 @@ public interface IHumanComputerInterface {
      * @param board The current state of the game board to be displayed.
      */
     public void showBoard(Board board);
+
+    /**
+     * Refresh the human computer interface after every player move.
+     */
+    void refreshInterface();
 }

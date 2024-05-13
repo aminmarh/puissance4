@@ -17,6 +17,17 @@ import java.util.logging.Logger;
 public class ConsoleOutput implements IOutput {
     private MessageSource l10n;
     private OutputStream out;
+    private static final ProcessBuilder CLEANER_PROCESS;
+
+    static {
+        // Determine the correct command based on OS just once
+        String os = System.getProperty("os.name");
+        if (os.contains("Windows")) {
+            CLEANER_PROCESS = new ProcessBuilder("cmd", "/c", "cls").inheritIO();
+        } else {
+            CLEANER_PROCESS = new ProcessBuilder("clear").inheritIO();
+        }
+    }
 
     /**
      * Constructs a ConsoleOutput object with specified localization source and output stream.
@@ -186,6 +197,21 @@ public class ConsoleOutput implements IOutput {
     public void showMenu() {
         try {
             out.write(l10n.getMessage("main_menu_message", null, Locale.ENGLISH).getBytes(StandardCharsets.UTF_8));
+        } catch (Exception e) {
+            Logger.getAnonymousLogger().severe(e.getMessage());
+        }
+    }
+
+    /**
+     * Refresh the human computer interface after every player move.
+     */
+    @Override
+    public void refreshInterface() {
+        try {
+            CLEANER_PROCESS.start().waitFor();
+        } catch (InterruptedException e) {
+            Logger.getAnonymousLogger().severe(e.getMessage());
+            Thread.currentThread().interrupt(); // Restore interrupt status
         } catch (Exception e) {
             Logger.getAnonymousLogger().severe(e.getMessage());
         }
