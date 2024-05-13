@@ -31,6 +31,15 @@ public class Menu {
         this.table = table;
     }
 
+    /**
+     * Initializes the language setting for the game's user interface.
+     * This method prompts the user to choose a language from the available options and sets the application's language accordingly.
+     * It handles user input to select between supported languages and provides feedback for invalid choices.
+     *
+     * @param out The output handler used for displaying language options and alerts.
+     * @return The selected Locale object representing the chosen language, or null if the operation is cancelled.
+     * @throws InputMismatchException if non-numeric input is received.
+     */
     public Locale initLanguage(IOutput out) {
         int nb = 0;
         while (true) {

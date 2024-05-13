@@ -41,6 +41,11 @@ public class ConsoleOutput implements IOutput {
         this.language= Locale.ENGLISH;
     }
 
+    /**
+     * Prompts the user to select a language for the game's interface.
+     * This method displays available language options to the user, pulling the prompt message from the localized resource bundle.
+     * The output is adapted based on the currently set language for initial display.
+     */
     public void selectLanguage(){
         try {
             out.write(l10n.getMessage("choice_language", null, this.language).getBytes(StandardCharsets.UTF_8));
@@ -49,10 +54,21 @@ public class ConsoleOutput implements IOutput {
         }
     }
 
+    /**
+     * Sets the language for all subsequent game messages displayed in the console.
+     * This method updates the language setting, affecting how messages are localized and displayed.
+     *
+     * @param newLanguage The new locale to set for message localization.
+     */
     public void setLanguage(Locale newLanguage) {
         this.language = newLanguage;
     }
 
+    /**
+     * Displays an error message if an invalid language selection is made.
+     * This method alerts the user to an invalid choice by outputting a localized error message,
+     * ensuring that users are aware of the mistake and prompted to correct it.
+     */
     public void alertLanguageError (){
         try {
             // Notify user of the number input error using a localized message.

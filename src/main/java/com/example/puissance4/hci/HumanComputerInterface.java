@@ -21,7 +21,6 @@ public class HumanComputerInterface implements IHumanComputerInterface {
     private IInput in;
     private IOutput out;
 
-
     /**
      * Constructs a HumanComputerInterface with necessary dependencies for managing players and interacting with users.
      * @param playerFactory The factory responsible for creating and managing players.
@@ -32,7 +31,6 @@ public class HumanComputerInterface implements IHumanComputerInterface {
         this.playerFactory = playerFactory;
         this.in = in;
         this.out = out;
-
     }
 
     /**
