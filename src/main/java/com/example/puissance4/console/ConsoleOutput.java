@@ -4,7 +4,6 @@ import com.example.puissance4.hci.IOutput;
 import org.springframework.context.MessageSource;
 import org.springframework.stereotype.Component;
 
-
 import java.io.OutputStream;
 import java.nio.charset.StandardCharsets;
 import java.util.Locale;
