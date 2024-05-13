@@ -78,6 +78,19 @@ public interface IOutput {
      */
     void refreshInterface();
 
+    /**
+     * Method for displaying the choice of languages proposed for modification
+     */
     void selectLanguage();
+
+    /**
+     * Method for modifying the language in the Output class. This will allow a language change for all displays.
+     * @param newLanguage The language by which such will be replaced
+     */
     void setLanguage(Locale newLanguage);
+
+    /**
+     * Display if user enters incorrect character
+     */
+    void alertLanguageError ();
 }

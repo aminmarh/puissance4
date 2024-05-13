@@ -18,10 +18,7 @@ class ConsoleOutputTest {
     private MessageSource l10n;
     @Mock
     private OutputStream out;
-
     private ConsoleOutput consoleOutput;
-
-    private String language;
 
     @BeforeEach
     void setUp() {

@@ -32,18 +32,29 @@ public class Menu {
     }
 
     public Locale initLanguage(IOutput out) {
-        out.selectLanguage();
-        int nb = in.retrieveLanguage();
-        if (nb == 1) {
-            out.setLanguage(Locale.ENGLISH);
-            return Locale.ENGLISH;
-        } else if (nb == 2) {
-            out.setLanguage(Locale.FRENCH);
-            return Locale.FRENCH;
+        int nb = 0;
+        while (true) {
+            out.selectLanguage();
+            try {
+                nb = in.retrieveLanguage();
+                if (nb == 1) {
+                    out.setLanguage(Locale.ENGLISH);
+                    return Locale.ENGLISH;
+                } else if (nb == 2) {
+                    out.setLanguage(Locale.FRENCH);
+                    return Locale.FRENCH;
+                }
+                else if (nb==3){
+                    return null;
+                }
+                else {
+                    out.alertLanguageError();
+                }
+            } catch (InputMismatchException e) {
+                out.alertInvalidNumber();
+            }
         }
-        return null;
     }
-
 
     /**
      * Starts the application's main loop, handling menu selections and delegating game operations.
@@ -52,8 +63,9 @@ public class Menu {
     public void startApplication() {
         boolean running = true;
         while (running) {
-            out.showMenu();
+
             try {
+                out.showMenu();
                 int choice = in.retrieveMainMenuChoice();
                 switch (choice) {
                     case 1:
@@ -66,9 +78,8 @@ public class Menu {
                         out.goodbye();
                         running = false;
                         break;
-
                     default:
-                        out.alertInvalidPlayerType();
+                        out.alertInvalidNumber();
                         break;
                 }
             } catch (InputMismatchException e) {

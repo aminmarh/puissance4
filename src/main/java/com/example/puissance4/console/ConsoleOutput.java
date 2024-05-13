@@ -15,12 +15,10 @@ import java.util.logging.Logger;
  */
 @Component
 public class ConsoleOutput implements IOutput {
-
     private MessageSource l10n;
     private OutputStream out;
     private  Locale language;
     private static final ProcessBuilder CLEANER_PROCESS;
-
 
     static {
         // Determine the correct command based on OS just once
@@ -31,8 +29,6 @@ public class ConsoleOutput implements IOutput {
             CLEANER_PROCESS = new ProcessBuilder("clear").inheritIO();
         }
     }
-
-
 
     /**
      * Constructs a ConsoleOutput object with specified localization source and output stream.
@@ -45,19 +41,27 @@ public class ConsoleOutput implements IOutput {
         this.language= Locale.ENGLISH;
     }
 
-
     public void selectLanguage(){
         try {
             out.write(l10n.getMessage("choice_language", null, this.language).getBytes(StandardCharsets.UTF_8));
+        } catch (Exception e) {
+            Logger.getAnonymousLogger().severe(e.getMessage());
+        }
+    }
+
+    public void setLanguage(Locale newLanguage) {
+        this.language = newLanguage;
+    }
+
+    public void alertLanguageError (){
+        try {
+            // Notify user of the number input error using a localized message.
+            out.write(l10n.getMessage("number_error", null, this.language).getBytes(StandardCharsets.UTF_8));
             out.write("\n".getBytes(StandardCharsets.UTF_8));
         } catch (Exception e) {
             Logger.getAnonymousLogger().severe(e.getMessage());
         }
 
-    }
-
-    public void setLanguage(Locale newLanguage) {
-        this.language = newLanguage;
     }
 
 

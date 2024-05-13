@@ -98,6 +98,7 @@ public class ConsoleInput implements IInput {
             throw new InputMismatchException();
         }
     }
+
     public int retrieveLanguage() {
         try {
             return sc.nextInt();
