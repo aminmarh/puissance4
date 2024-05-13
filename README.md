@@ -1,3 +1,4 @@
+[English](README.md) | [Français](README.fr.md)
 # Puissance 4
 
 Bienvenue sur le repository GitHub de **Puissance 4**. Ce projet vise à reproduire un jeu de Puissance 4 sur console.
