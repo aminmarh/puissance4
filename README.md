@@ -28,7 +28,7 @@ To get a copy of the project on your local machine for development and testing, 
    ```bash
    git clone https://github.com/aminmarh/puissance4.git
    ```
-4. After cloning the repository, change the current directory to `power4`:
+4. After cloning the repository, change the current directory to `puissance4`:
     ```bash
      cd puissance4
      ```
