@@ -35,7 +35,7 @@ public interface IHumanComputerInterface {
     public void showBoard(Board board);
 
     /**
-     * Clears the console after every player move.
+     * Refresh the human computer interface after every player move.
      */
-    void clearConsole();
+    void refreshInterface();
 }

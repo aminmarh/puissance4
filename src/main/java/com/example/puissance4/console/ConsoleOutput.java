@@ -208,19 +208,19 @@ public class ConsoleOutput implements IOutput {
      * Clears the console output after every player move.
      */
     @Override
-    public void clearConsole() {
+    public void refreshInterface() {
         try {
             CLEANER_PROCESS.start().waitFor();
         } catch (IOException e) {
             try {
-                out.write((l10n.getMessage("clear_console_error_io", null, Locale.ENGLISH) + Arrays.toString(e.getMessage().getBytes(StandardCharsets.UTF_8))).getBytes());
+                out.write((l10n.getMessage("refresh_hci_error_io", null, Locale.ENGLISH) + Arrays.toString(e.getMessage().getBytes(StandardCharsets.UTF_8))).getBytes());
                 out.write("\n".getBytes(StandardCharsets.UTF_8));
             } catch (IOException ioException) {
                 Logger.getAnonymousLogger().severe(ioException.getMessage());
             }
         } catch (InterruptedException e) {
             try {
-                out.write((l10n.getMessage("clear_console_error_interrupted", null, Locale.ENGLISH) + Arrays.toString(e.getMessage().getBytes(StandardCharsets.UTF_8))).getBytes());
+                out.write((l10n.getMessage("refresh_hci_error_interrupted", null, Locale.ENGLISH) + Arrays.toString(e.getMessage().getBytes(StandardCharsets.UTF_8))).getBytes());
                 out.write("\n".getBytes(StandardCharsets.UTF_8));
             } catch (IOException ioException) {
                 Logger.getAnonymousLogger().severe(ioException.getMessage());
@@ -228,7 +228,7 @@ public class ConsoleOutput implements IOutput {
             Thread.currentThread().interrupt(); // Restore interrupt status
         } catch (Exception e) {
             try {
-                out.write((l10n.getMessage("clear_console_error_unexpected", null, Locale.ENGLISH) + Arrays.toString(e.getMessage().getBytes(StandardCharsets.UTF_8))).getBytes());
+                out.write((l10n.getMessage("refresh_hci_error_unexpected", null, Locale.ENGLISH) + Arrays.toString(e.getMessage().getBytes(StandardCharsets.UTF_8))).getBytes());
                 out.write("\n".getBytes(StandardCharsets.UTF_8));
             } catch (IOException ioException) {
                 Logger.getAnonymousLogger().severe(ioException.getMessage());

@@ -72,7 +72,7 @@ public interface IOutput {
     void showMenu();
 
     /**
-     * Clears the console after every player move.
+     * Refresh the human computer interface after every player move.
      */
-    void clearConsole();
+    void refreshInterface();
 }

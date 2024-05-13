@@ -96,10 +96,10 @@ public class HumanComputerInterface implements IHumanComputerInterface {
     }
 
     /**
-     * Clears the console after every player move.
+     * Refresh the human computer interface after every player move.
      */
     @Override
-    public void clearConsole() {
-        out.clearConsole();
+    public void refreshInterface() {
+        out.refreshInterface();
     }
 }
