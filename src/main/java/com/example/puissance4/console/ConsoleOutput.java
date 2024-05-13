@@ -4,10 +4,9 @@ import com.example.puissance4.hci.IOutput;
 import org.springframework.context.MessageSource;
 import org.springframework.stereotype.Component;
 
-import java.io.IOException;
+
 import java.io.OutputStream;
 import java.nio.charset.StandardCharsets;
-import java.util.Arrays;
 import java.util.Locale;
 import java.util.logging.Logger;
 
@@ -205,7 +204,7 @@ public class ConsoleOutput implements IOutput {
     }
 
     /**
-     * Clears the console output after every player move.
+     * Refresh the human computer interface after every player move.
      */
     @Override
     public void refreshInterface() {
