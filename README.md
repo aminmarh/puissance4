@@ -68,8 +68,6 @@ If you prefer to use Docker to run the application, make sure that Docker is ins
 
 Our application allows you to play the game of Puissance 4 on console. Here's how to play it:
 
-- **Menu Options**: After launching the console, you will be presented with a menu where you can choose between playing and quitting. Additionally, you can select the language for the game, either French or English.
-  
 - **Choice of game mode**: At the start of the game, you can choose to play against another player or against an AI (or have 2 AI play). You must then give the names of the players.
 
 - **Entering the column**: To play a move, the console will prompt you to enter the number of the column in which you want to place your token. The column must be an integer between 1 and 7.
