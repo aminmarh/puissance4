@@ -41,21 +41,18 @@ public class AI extends Player {
      * @return the column index where the token should be placed.
      */
     private int findBestMove(Board board) {
-        // Check for a possible win in any column.
         for (int i = 0; i < Board.COLUMNS; i++) {
             if (board.canWinInNextMove(i, this.getToken())) {
-                return i;  // Return immediately to win the game.
+                return i;
             }
         }
 
-        // If no immediate win, check to block the opponent.
         for (int i = 0; i < Board.COLUMNS; i++) {
             if (board.canWinInNextMove(i, this.getToken().opposite())) {
-                return i;  // Block the opponent's winning move.
+                return i;
             }
         }
 
-        // If no win or block is possible, choose a random valid move.
         return selectStrategicMove(board);
     }
 
@@ -66,8 +63,8 @@ public class AI extends Player {
      * @return the column index for the random valid move.
      */
     private int selectStrategicMove(Board board) {
-        int move = (int) (Math.random() * Board.COLUMNS);  // Start with a random column.
-        while (!board.isMoveValid(move)) {  // Ensure the move is valid.
+        int move = (int) (Math.random() * Board.COLUMNS);
+        while (!board.isMoveValid(move)) {
             move = (int) (Math.random() * Board.COLUMNS);
         }
         return move;

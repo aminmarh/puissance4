@@ -155,15 +155,12 @@ public class Board {
             }
         }
 
-        // Check if this move leads to a winning condition.
         boolean canWin = isWon();
 
-        // Remove the token to revert the board to its original state.
         if (rowToPlace != -1) {
             board[rowToPlace][column] = Token.Empty;
         }
 
-        // Return whether the simulated move can win the game.
         return canWin;
     }
 }

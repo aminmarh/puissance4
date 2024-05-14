@@ -12,6 +12,6 @@ public class InvalidMoveException extends Exception {
      * The message "Invalid move" is used to clearly indicate that the error occurred due to an invalid game move.
      */
     public InvalidMoveException() {
-        super("Invalid move");  // Initialize the superclass with a specific message indicating the nature of the error.
+        super("Invalid move");
     }
 }

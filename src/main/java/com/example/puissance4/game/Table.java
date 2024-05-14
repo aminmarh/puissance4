@@ -28,27 +28,25 @@ public class Table {
      */
     public void play() {
         this.board = new Board();
-        this.players = gameManager.initGame();  // Initialize the game and players.
+        this.players = gameManager.initGame();
 
-        // Game loop continues until a break condition is met (win or draw).
+
         while (true) {
             for (IPlayer player : players) {
-                gameManager.refreshInterface();         // Refresh the HCI after each move.
-                gameManager.showBoard(this.board);  // Display the current state of the board.
-                player.play(this.board);            // Current player makes a move.
+                gameManager.refreshInterface();
+                gameManager.showBoard(this.board);
+                player.play(this.board);
 
-                // Check if the current player's move resulted in a win.
                 if (this.board.isWon()) {
-                    gameManager.refreshInterface();         // Refresh the HCI after the last move.
-                    gameManager.finishGame(player, this.board);  // End the game with a winner.
-                    return;  // Exit the game loop.
+                    gameManager.refreshInterface();
+                    gameManager.finishGame(player, this.board);
+                    return;
                 }
 
-                // Check if the board is full and no more moves can be made (draw).
                 if (this.board.isFull()) {
-                    gameManager.refreshInterface();         // Refresh the HCI after the last move.
-                    gameManager.finishGame(null, this.board);  // End the game with a draw.
-                    return;  // Exit the game loop.
+                    gameManager.refreshInterface();
+                    gameManager.finishGame(null, this.board);
+                    return;
                 }
             }
         }
