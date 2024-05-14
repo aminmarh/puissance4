@@ -251,7 +251,7 @@ public class ConsoleOutput implements IOutput {
             CLEANER_PROCESS.start().waitFor();
         } catch (InterruptedException e) {
             Logger.getAnonymousLogger().severe(e.getMessage());
-            Thread.currentThread().interrupt(); // Restore interrupt status
+            Thread.currentThread().interrupt();
         } catch (Exception e) {
             Logger.getAnonymousLogger().severe(e.getMessage());
         }

@@ -47,4 +47,15 @@ class PlayerFactoryTest {
         assertEquals(Human.class, playerFactory.getPlayers()[0].getClass());
         assertEquals(AI.class, playerFactory.getPlayers()[1].getClass());
     }
+
+    @Test
+    void resetPlayerTest(){
+        try {
+            playerFactory.createPlayer(1, "Player");
+        } catch (InvalidPlayerTypeException e) {
+            throw new RuntimeException(e);
+        }
+        playerFactory.resetPlayers();
+        assertEquals(0,playerFactory.getPlayers().length);
+    }
 }
