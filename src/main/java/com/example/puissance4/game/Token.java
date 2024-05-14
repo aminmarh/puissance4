@@ -13,12 +13,10 @@ public enum Token {
     Red {
         @Override
         public String toString() {
-            // Returns the Red token representation with ANSI color code for red.
             return "\u001B[31m" + "R" + "\u001B[0m";
         }
         @Override
         public Token opposite() {
-            // The opposite of Red is Yellow, typically used by the opponent.
             return Yellow;
         }
     },
@@ -30,12 +28,10 @@ public enum Token {
     Yellow {
         @Override
         public String toString() {
-            // Returns the Yellow token representation with ANSI color code for yellow.
             return "\u001B[33m" + "Y" + "\u001B[0m";
         }
         @Override
         public Token opposite() {
-            // The opposite of Yellow is Red, typically used by the opponent.
             return Red;
         }
     },
@@ -47,12 +43,10 @@ public enum Token {
     Empty {
         @Override
         public String toString() {
-            // Returns a space character representing an empty slot in the game board.
             return " ";
         }
         @Override
         public Token opposite() {
-            // For an empty token, the opposite is itself as it's a neutral placeholder.
             return Empty;
         }
     };

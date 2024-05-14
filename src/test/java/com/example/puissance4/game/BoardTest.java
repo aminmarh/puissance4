@@ -85,11 +85,9 @@ class BoardTest {
     @Test
     void testCanWinInNextMoveWinScenario() {
         try {
-            // Setup the board with three consecutive Red tokens
             board.putToken(0, Token.Red);
             board.putToken(1, Token.Red);
             board.putToken(2, Token.Red);
-            // Check if placing a fourth Red token results in a win
             assertTrue(board.canWinInNextMove(3, Token.Red), "AI should detect a winning move");
         } catch (InvalidMoveException e) {
             fail("Invalid move during setup of win scenario");
@@ -104,10 +102,8 @@ class BoardTest {
     @Test
     void testCanWinInNextMoveNoWinScenario() {
         try {
-            // Setup the board with two non-consecutive Red tokens
             board.putToken(0, Token.Red);
             board.putToken(1, Token.Red);
-            // Verify that placing another Red token in a non-winning column does not falsely report a win
             assertFalse(board.canWinInNextMove(3, Token.Red), "AI should correctly identify no win scenario");
         } catch (InvalidMoveException e) {
             fail("Invalid move during setup of no win scenario");

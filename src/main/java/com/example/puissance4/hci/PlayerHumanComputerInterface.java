@@ -34,23 +34,23 @@ public class PlayerHumanComputerInterface implements IPlayerHumanComputerInterfa
      */
     @Override
     public int playRound(String playerName) {
-        out.callPlayer(playerName);  // Prompt the player to make a move.
+        out.callPlayer(playerName);
         int choice = 0;
         boolean validNumber = false;
 
         while (!validNumber) {
             try {
-                choice = in.retrievePlayerMove();  // Attempt to retrieve the player's move.
-                if (choice >= 1 && choice <= 7) {  // Check if the move is within the valid column range.
+                choice = in.retrievePlayerMove();
+                if (choice >= 1 && choice <= 7) {
                     validNumber = true;
                 } else {
-                    out.alertInvalidColumn();  // Alert if the column number is out of range.
+                    out.alertInvalidColumn();
                 }
             } catch (InputMismatchException e) {
-                out.alertInvalidNumber();  // Alert if the input is not a valid number.
+                out.alertInvalidNumber();
             }
         }
-        return choice - 1;  // Adjust for zero-based index.
+        return choice - 1;
     }
 
     /**
@@ -58,6 +58,6 @@ public class PlayerHumanComputerInterface implements IPlayerHumanComputerInterfa
      */
     @Override
     public void badMove() {
-        out.alertInvalidColumn();  // Inform the player about the invalid move.
+        out.alertInvalidColumn();
     }
 }

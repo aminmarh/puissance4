@@ -33,12 +33,9 @@ public class Human extends Player {
         boolean goodMove = false;
         while (!goodMove) {
             try {
-                // Attempt to make a move at the column selected by the player.
-                // The column index is retrieved through the human-computer interaction interface.
                 board.putToken(app.playRound(this.getName()), this.getToken());
-                goodMove = true;  // Move was successful, exit the loop.
+                goodMove = true;
             } catch (InvalidMoveException e) {
-                // If the move is invalid (e.g., the column is full), inform the player and prompt for another attempt.
                 app.badMove();
             }
         }

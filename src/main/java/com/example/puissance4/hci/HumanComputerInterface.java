@@ -41,16 +41,16 @@ public class HumanComputerInterface implements IHumanComputerInterface {
     @Override
     public IPlayer[] initGame() {
         playerFactory.resetPlayers();
-        out.welcome(); // Display a welcome message.
+        out.welcome();
         for (int i = 0; i< Table.NB_JOUEURS; i++) {
             String name;
 
-            out.askPlayerName(); // Ask for the player's name.
-            name = in.retrievePlayerName(); // Retrieve the name entered by the user.
+            out.askPlayerName();
+            name = in.retrievePlayerName();
 
             boolean validChoice = false;
             int choice = 0;
-            out.askPlayerType(); // Ask for the type of player (Human or AI).
+            out.askPlayerType();
 
             while (!validChoice) {
                 try {
@@ -62,13 +62,13 @@ public class HumanComputerInterface implements IHumanComputerInterface {
                         out.alertInvalidPlayerType();
                     }
                 } catch (InputMismatchException e) {
-                    out.alertInvalidNumber(); // Alert if the input is not a valid integer.
+                    out.alertInvalidNumber();
                 } catch (InvalidPlayerTypeException e) {
-                    out.alertInvalidPlayerType(); // Alert if the chosen player type is invalid.
+                    out.alertInvalidPlayerType();
                 }
             }
         }
-        return this.playerFactory.getPlayers();// Return the array of created players.
+        return this.playerFactory.getPlayers();
     }
 
     /**
@@ -78,13 +78,13 @@ public class HumanComputerInterface implements IHumanComputerInterface {
      */
     @Override
     public void finishGame(IPlayer winner, Board board) {
-        showBoard(board); // Display the final state of the board.
+        showBoard(board);
         if (winner == null) {
-            out.announceDraw(); // Announce a draw if no winner.
+            out.announceDraw();
         } else {
-            out.announceVictory(winner.getName()); // Announce the victory with the winner's name.
+            out.announceVictory(winner.getName());
         }
-        out.goodbye(); // Display a goodbye message.
+        out.goodbye();
     }
 
     /**
@@ -93,7 +93,7 @@ public class HumanComputerInterface implements IHumanComputerInterface {
      */
     @Override
     public void showBoard(Board board) {
-        out.displayBoard(board.toString()); // Output the current state of the board.
+        out.displayBoard(board.toString());
     }
 
     /**

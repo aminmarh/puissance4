@@ -26,7 +26,7 @@ class AITest {
     @BeforeEach
     void setUpTest() {
         aiPlayer = new AI("AI", Token.Red);
-        board = Mockito.mock(Board.class);  // Using Mockito to mock the board
+        board = Mockito.mock(Board.class);
     }
 
     /**
@@ -35,10 +35,8 @@ class AITest {
      */
     @Test
     void testPlayWithWinningMoveAvailable() throws InvalidMoveException {
-        // Mock the board to simulate a winning opportunity for AI at column 3.
         when(board.canWinInNextMove(3, Token.Red)).thenReturn(true);
         aiPlayer.play(board);
-        // Verify that the AI makes the winning move at column 3.
         Mockito.verify(board).putToken(3, Token.Red);
     }
 
@@ -48,13 +46,10 @@ class AITest {
      */
     @Test
     void testPlayWithBlockingMoveAvailable() throws InvalidMoveException {
-        // Mock the board so there are no direct wins available for the AI,
-        // but the opponent can win on their next move at column 2.
         when(board.canWinInNextMove(Mockito.anyInt(), Mockito.any())).thenReturn(false);
         when(board.canWinInNextMove(2, Token.Yellow)).thenReturn(true);
         when(board.isMoveValid(2)).thenReturn(true);
         aiPlayer.play(board);
-        // Verify that the AI places its token in column 2 to block the opponent.
         Mockito.verify(board).putToken(2, Token.Red);
     }
 
@@ -64,12 +59,10 @@ class AITest {
      */
     @Test
     void testPlayFallbackRandomMove() throws InvalidMoveException {
-        // Mock the board to simulate no immediate wins or blocks are available.
         when(board.canWinInNextMove(Mockito.anyInt(), Mockito.any())).thenReturn(false);
         when(board.isMoveValid(Mockito.anyInt())).thenReturn(false);
-        when(board.isMoveValid(4)).thenReturn(true);  // Only column 4 is valid to move.
+        when(board.isMoveValid(4)).thenReturn(true);
         aiPlayer.play(board);
-        // Verify that the AI makes a move in the valid column 4.
         Mockito.verify(board).putToken(4, Token.Red);
     }
 }

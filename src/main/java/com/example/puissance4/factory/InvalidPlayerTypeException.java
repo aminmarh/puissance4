@@ -13,6 +13,6 @@ public class InvalidPlayerTypeException extends Exception {
      * that an invalid player type has been encountered.
      */
     public InvalidPlayerTypeException() {
-        super("Invalid player type"); // Message provides clarity on the nature of the error.
+        super("Invalid player type");
     }
 }
