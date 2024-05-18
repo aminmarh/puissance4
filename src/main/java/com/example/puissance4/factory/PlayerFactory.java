@@ -66,6 +66,6 @@ public class PlayerFactory implements IPlayerFactory {
     @Override
     public void resetPlayers() {
         currentPlayer = 0;
-        players = new IPlayer[]{};
+        players = new IPlayer[Table.NB_JOUEURS];
     }
 }
