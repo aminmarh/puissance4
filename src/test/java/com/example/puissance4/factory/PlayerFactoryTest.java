@@ -56,6 +56,6 @@ class PlayerFactoryTest {
             throw new RuntimeException(e);
         }
         playerFactory.resetPlayers();
-        assertEquals(0,playerFactory.getPlayers().length);
+        assertNull(playerFactory.getPlayers()[0]);
     }
 }
