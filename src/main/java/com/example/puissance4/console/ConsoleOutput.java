@@ -172,6 +172,15 @@ public class ConsoleOutput implements IOutput {
         }
     }
 
+    @Override
+    public void alertFullColumn() {
+        try {
+            out.write(l10n.getMessage("full_column", null, this.language).getBytes(StandardCharsets.UTF_8));
+        } catch (Exception e) {
+            Logger.getAnonymousLogger().severe(e.getMessage());
+        }
+    }
+
     /**
      * Announces a draw in the game.
      */

@@ -38,6 +38,6 @@ class PlayerHumanComputerInterfaceTest {
     @Test
     void badMoveTest() {
         playerHCI.badMove();
-        verify(out, times(1)).alertInvalidColumn();
+        verify(out, times(1)).alertFullColumn();
     }
 }

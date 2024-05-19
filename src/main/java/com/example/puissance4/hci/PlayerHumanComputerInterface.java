@@ -58,6 +58,6 @@ public class PlayerHumanComputerInterface implements IPlayerHumanComputerInterfa
      */
     @Override
     public void badMove() {
-        out.alertInvalidColumn();
+        out.alertFullColumn();
     }
 }
