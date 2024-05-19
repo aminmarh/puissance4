@@ -15,6 +15,7 @@ public class PlayerHumanComputerInterface implements IPlayerHumanComputerInterfa
     private IInput in;
     private IOutput out;
 
+
     /**
      * Constructs a PlayerHumanComputerInterface with specific input and output handlers.
      * @param in Interface for retrieving player input.
@@ -23,6 +24,7 @@ public class PlayerHumanComputerInterface implements IPlayerHumanComputerInterfa
     public PlayerHumanComputerInterface(IInput in, IOutput out) {
         this.in = in;
         this.out = out;
+
     }
 
     /**
@@ -43,7 +45,12 @@ public class PlayerHumanComputerInterface implements IPlayerHumanComputerInterfa
                 choice = in.retrievePlayerMove();
                 if (choice >= 1 && choice <= 7) {
                     validNumber = true;
-                } else {
+                }
+                if (choice==0){
+                    throw new ReturnToMenuException();
+                }
+
+                else {
                     out.alertInvalidColumn();
                 }
             } catch (InputMismatchException e) {

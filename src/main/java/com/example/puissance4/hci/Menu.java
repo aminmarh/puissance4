@@ -1,5 +1,6 @@
 package com.example.puissance4.hci;
 
+import com.example.puissance4.savegame.Save;
 import com.example.puissance4.game.Table;
 import org.springframework.stereotype.Component;
 
@@ -15,6 +16,8 @@ public class Menu implements IMenu {
     private final IInput in;
     private final IOutput out;
     private final Table table;
+    private Save save;
+
 
     /**
      * Constructs a GameController with dependencies for input, output, and game table.
@@ -23,10 +26,11 @@ public class Menu implements IMenu {
      * @param out The output handler for displaying information to the user.
      * @param table  The main game logic handler, responsible for managing gameplay.
      */
-    public Menu(IInput in, IOutput out, Table table) {
+    public Menu(IInput in, IOutput out, Table table, Save save) {
         this.in = in;
         this.out = out;
         this.table = table;
+        this.save = save;
     }
 
     /**
@@ -74,12 +78,22 @@ public class Menu implements IMenu {
                 int choice = in.retrieveMainMenuChoice();
                 switch (choice) {
                     case 1:
-                        table.play();
-                        break;
+                        try {
+                            table.startGame();
+
+                        } catch (ReturnToMenuException e){
+                            save.savePlayersToJson(table.getPlayers());
+                            save.saveBoardOnJson(table.getBoard());
+                            break;
+                        }
                     case 2:
-                        initLanguage(out);
+                        save.loadGame();
+                        table.continueGame();
                         break;
                     case 3:
+                        initLanguage(out);
+                        break;
+                    case 4:
                         out.goodbye();
                         running = false;
                         break;
@@ -87,6 +101,7 @@ public class Menu implements IMenu {
                         out.alertInvalidCharacterMenu();
                         break;
                 }
+
             } catch (InputMismatchException e) {
                 out.alertInvalidCharacterMenu();
             }

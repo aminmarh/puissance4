@@ -26,11 +26,15 @@ public class Table {
      * Starts and manages the game play loop. Controls the sequence of player turns,
      * checks for game ending conditions, and coordinates with the game manager to handle game events.
      */
-    public void play() {
+    public void startGame() {
         this.board = new Board();
         this.players = gameManager.initGame();
 
 
+        play();
+    }
+
+    private void play() {
         while (true) {
             for (IPlayer player : players) {
                 gameManager.refreshInterface();
@@ -50,5 +54,39 @@ public class Table {
                 }
             }
         }
+    }
+
+    public void continueGame() {
+        int[] numberOfTokens = new int[NB_JOUEURS];
+        for (Token[] row : board.getBoard()) {
+            for (Token token : row) {
+                if (token != Token.Empty) {
+                    numberOfTokens[token.ordinal()]++;
+                }
+            }
+        }
+        int lastPlayer = numberOfTokens[0] > numberOfTokens[1] ? 1 : 0;
+        if (lastPlayer == 1) {
+            IPlayer tmp = players[0];
+            players[0] = players[1];
+            players[1] = tmp;
+        }
+        play();
+    }
+
+    public IPlayer[] getPlayers() {
+        return players;
+    }
+
+    public Board getBoard() {
+        return board;
+    }
+
+    public void setBoard(Board board) {
+        this.board = board;
+    }
+
+    public void setPlayers(IPlayer[] players) {
+        this.players = players;
     }
 }

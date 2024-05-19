@@ -38,7 +38,7 @@ class TableTest {
 
     @Test
     void playTest() {
-        table.play();
+        table.startGame();
         verify(gameManager, atLeastOnce()).showBoard(any(Board.class));
         verify(player1, atLeastOnce()).play(any(Board.class));
         verify(player2, atLeastOnce()).play(any(Board.class));

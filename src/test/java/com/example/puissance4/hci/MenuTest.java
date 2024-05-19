@@ -21,7 +21,7 @@ class MenuTest {
         input = mock(IInput.class);
         output = mock(IOutput.class);
         table = mock(Table.class);
-        menu = new Menu(input, output, table);
+        menu = new Menu(input, output, table,null);
     }
 
     @Test

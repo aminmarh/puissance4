@@ -38,4 +38,5 @@ public interface IHumanComputerInterface {
      * Refresh the human computer interface after every player move.
      */
     void refreshInterface();
+
 }
