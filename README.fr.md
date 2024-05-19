@@ -63,3 +63,7 @@ Si vous préférez utiliser Docker pour exécuter l'application, assurez-vous qu
    docker run -it puissance4
    ```
    Cela lancera l'application dans un conteneur Docker, où vous pourrez jouer au jeu en mode console.
+
+## Specifications
+
+Cliquez [ici](SPECS.md) pour lire les spécifications de notre jeu.

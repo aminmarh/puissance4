@@ -3,16 +3,6 @@
 
 Here are the specifications for our Connect Four game.
 
-## Team Members
-
-- [Seghdau Yanis](https://github.com/YanisGlg95)
-- [Marheraroui Amin](https://github.com/aminmarh)
-- [Abbassi Ilyes](https://github.com/dijxt)
-- [Ibouda Yasser](https://github.com/Yasser1080)
-- [Souissi Dhia-Eddine](https://github.com/Dhia78)
-
-# Console Connect Four Application Specifications
-
 ## Features
 
 ### 1. Menu Display and Options

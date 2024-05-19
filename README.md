@@ -63,3 +63,7 @@ If you prefer to use Docker to run the application, make sure that Docker is ins
     docker run -it puissance4
     ```
    This will launch the application in a Docker container, where you can play the game in console mode.
+
+## Specifications 
+
+Click [here](SPECS.md) to read the specifications for our game.

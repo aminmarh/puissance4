@@ -3,16 +3,6 @@
 
 Voici les spécifications de notre jeu Puissance 4.
 
-## Membres de l'équipe
-
-- [Seghdau Yanis](https://github.com/YanisGlg95)
-- [Marheraroui Amin](https://github.com/aminmarh)
-- [Abbassi Ilyes](https://github.com/dijxt)
-- [Ibouda Yasser](https://github.com/Yasser1080)
-- [Souissi Dhia-Eddine](https://github.com/Dhia78)
-
-# Spécifications de l'application Puissance 4 Console
-
 ## Fonctionnalités
 
 ### 1. Affichage et options du menu
