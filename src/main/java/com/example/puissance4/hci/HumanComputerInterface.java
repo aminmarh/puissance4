@@ -84,7 +84,6 @@ public class HumanComputerInterface implements IHumanComputerInterface {
         } else {
             out.announceVictory(winner.getName());
         }
-        out.goodbye();
     }
 
     /**

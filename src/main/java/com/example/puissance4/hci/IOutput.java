@@ -30,6 +30,11 @@ public interface IOutput {
     void alertInvalidNumber();
 
     /**
+     * Alerts the user when an invalid number has been entered in the menu, typically in response to malformed input.
+     */
+    void alertInvalidCharacterMenu();
+
+    /**
      * Alerts the user when an invalid player type has been selected, ensuring only valid options are chosen.
      */
     void alertInvalidPlayerType();

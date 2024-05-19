@@ -70,8 +70,7 @@ public class ConsoleOutput implements IOutput {
      */
     public void alertLanguageError (){
         try {
-            out.write(l10n.getMessage("number_error", null, this.language).getBytes(StandardCharsets.UTF_8));
-            out.write("\n".getBytes(StandardCharsets.UTF_8));
+            out.write(l10n.getMessage("number_error_menu", null, this.language).getBytes(StandardCharsets.UTF_8));
         } catch (Exception e) {
             Logger.getAnonymousLogger().severe(e.getMessage());
         }
@@ -121,6 +120,15 @@ public class ConsoleOutput implements IOutput {
     public void alertInvalidNumber() {
         try {
             out.write(l10n.getMessage("number_error", null, this.language).getBytes(StandardCharsets.UTF_8));
+        } catch (Exception e) {
+            Logger.getAnonymousLogger().severe(e.getMessage());
+        }
+    }
+
+    @Override
+    public void alertInvalidCharacterMenu() {
+        try {
+            out.write(l10n.getMessage("number_error_menu", null, this.language).getBytes(StandardCharsets.UTF_8));
         } catch (Exception e) {
             Logger.getAnonymousLogger().severe(e.getMessage());
         }
@@ -211,7 +219,6 @@ public class ConsoleOutput implements IOutput {
     public void callPlayer(String name) {
         try {
             out.write(l10n.getMessage("player_prompt", new Object[]{name},this.language).getBytes(StandardCharsets.UTF_8));
-            out.write("\n".getBytes(StandardCharsets.UTF_8));
         } catch (Exception e) {
             Logger.getAnonymousLogger().severe(e.getMessage());
         }

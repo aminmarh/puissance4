@@ -53,10 +53,10 @@ public class Menu implements IMenu {
                     case 3 -> {
                         return;
                     }
-                    default -> out.alertLanguageError();
+                    default -> out.alertInvalidCharacterMenu();
                 }
             } catch (InputMismatchException e) {
-                out.alertInvalidNumber();
+                out.alertInvalidCharacterMenu();
             }
         }
     }
@@ -84,11 +84,11 @@ public class Menu implements IMenu {
                         running = false;
                         break;
                     default:
-                        out.alertInvalidNumber();
+                        out.alertInvalidCharacterMenu();
                         break;
                 }
             } catch (InputMismatchException e) {
-                out.alertInvalidNumber();
+                out.alertInvalidCharacterMenu();
             }
         }
     }
