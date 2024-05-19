@@ -30,6 +30,11 @@ public interface IOutput {
     void alertInvalidNumber();
 
     /**
+     * Alerts the user when an invalid number has been entered in the menu, typically in response to malformed input.
+     */
+    void alertInvalidCharacterMenu();
+
+    /**
      * Alerts the user when an invalid player type has been selected, ensuring only valid options are chosen.
      */
     void alertInvalidPlayerType();
@@ -41,9 +46,14 @@ public interface IOutput {
     void displayBoard(String board);
 
     /**
-     * Alerts the user when an invalid column has been selected for a move, typically when the column is full or out of bounds.
+     * Alerts the user when an invalid column has been selected for a move, typically when the column out of bounds.
      */
     void alertInvalidColumn();
+
+    /**
+     * Alerts the user when the column entered is full
+     */
+    void alertFullColumn();
 
     /**
      * Announces that the game has ended in a draw when no players have won and no further moves are possible.

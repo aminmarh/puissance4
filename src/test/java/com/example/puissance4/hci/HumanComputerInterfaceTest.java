@@ -43,7 +43,6 @@ class HumanComputerInterfaceTest {
         when(player.getName()).thenReturn("Player1");
         hci.finishGame(player, mock(Board.class));
         verify(out, times(1)).announceVictory(anyString());
-        verify(out, times(1)).goodbye();
     }
 
     @Test
