@@ -64,40 +64,6 @@ If you prefer to use Docker to run the application, make sure that Docker is ins
     ```
    This will launch the application in a Docker container, where you can play the game in console mode.
 
-## Features
+## Specifications 
 
-Our application allows you to play the game of Puissance 4 on console. Here's how to play it:
-
-- **Choice of game mode**: At the start of the game, you can choose to play against another player or against an AI (or have 2 AI play). You must then give the names of the players.
-
-- **Entering the column**: To play a move, the console will prompt you to enter the number of the column in which you want to place your token. The column must be an integer between 1 and 7.
-
-- **End of the game**: The game ends when a player aligns 4 tokens horizontally, vertically or diagonally. If the grid is full and no player has lined up 4 tokens, the game ends in a draw.
-
-## Project organisation
-
-During the development of this project, we used several tools and methods to facilitate collaboration and code management. Here are some tools and methods we used:
-
-- **Trello**: We chose Trello for monitoring the progress of the project. We create a ticket with specifications to integrate a new feature or resolve an issue in our application. This ticket is then assigned to a member of the team who is responsible for carrying it out. Once the ticket is completed, it is moved to the "Done" column to indicate that it is complete. Here is the link to our Trello board: [Trello](https://trello.com/invite/b/YfXafSrf/ATTI017cd0e8e341ace6cc525a3377692bf3BE2850FF/projet-peut-4)
-
-- **Discord**: We used Discord to communicate in real time. We created a Discord server for our team and used the text channels to discuss the progress of the project and any issues encountered. We also used voice channels to hold meetings and discuss more complex issues.
-
-- **Github**: Versioning was carried out on Github, a tool whose knowledge and use varies according to each member. For the integration of the new code, Pull Requests were made and verified by each member before being Merged onto the Master branch. A GitHub Actions WorkFlow has been set up on our repository to allow better code integration. When you merge a Pull Request on the Master branch, tests are run automatically to ensure that the published code works as expected.
-
-- **IntelliJ**: The entire team worked on IntelliJ and sometimes we used the "Code With Me" functionality to do pair programming. In addition, we used the SonarLint plugin to analyze the quality of the code and detect bad practices.
-
-
-
-## Encountered difficulties
-
-During the development of this project, we encountered several challenges:
-
-- **Dependency injections**: We had difficulty understanding which components of our application should be injected and how to inject them correctly. So we referred to our class diagram to find out which components should be injected.
-
-- **Management of user input and console output**: We had difficulty managing input and output while respecting Java best practices. Indeed, we had difficulties with user input errors and messages to display while taking internationalization into account.
-
-- **AI player algorithm**: We had difficulty understanding and implementing an algorithm from the Minimax family for creating an AI. So we decided to create a simple AI that chooses a column semi-randomly by blocking the opponent's winning moves and trying to win if it gets the chance.
-
-## Assessment
-
-This project allowed us to put into practice the concepts we learned in class. We were able to work as a team and use project management tools to facilitate collaboration. We were also able to improve our design and architecture skills to create a well-structured and easy-to-maintain application.
+Click [here](SPECS.md) to read the specifications for our game.
