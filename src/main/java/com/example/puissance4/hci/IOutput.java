@@ -100,7 +100,7 @@ public interface IOutput {
     void setLanguage(Locale newLanguage);
 
     /**
-     * Display if user enters incorrect character
+     * Display the menu with the option to resume the game
      */
-    void alertLanguageError ();
+    void showMenuWithResume();
 }

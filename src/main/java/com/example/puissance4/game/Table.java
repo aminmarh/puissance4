@@ -29,11 +29,12 @@ public class Table {
     public void startGame() {
         this.board = new Board();
         this.players = gameManager.initGame();
-
-
         play();
     }
 
+    /**
+     * Manages the game play loop, allowing for the continuation of a game that has been paused or interrupted.
+     */
     private void play() {
         while (true) {
             for (IPlayer player : players) {
@@ -56,6 +57,9 @@ public class Table {
         }
     }
 
+    /**
+     * Resumes a game that was previously paused or interrupted, allowing the game to continue from its last state.
+     */
     public void continueGame() {
         int[] numberOfTokens = new int[NB_JOUEURS];
         for (Token[] row : board.getBoard()) {

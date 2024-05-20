@@ -9,7 +9,6 @@ import com.example.puissance4.game.Table;
 import org.springframework.stereotype.Component;
 
 import java.util.InputMismatchException;
-import java.util.Locale;
 
 /**
  * Implements the IHumanComputerInterface to manage interactions between the game's human and computer elements.
@@ -70,8 +69,6 @@ public class HumanComputerInterface implements IHumanComputerInterface {
         }
         return this.playerFactory.getPlayers();
     }
-
-
 
     /**
      * Handles the end of the game by displaying the final board state, announcing the result, and saying goodbye.

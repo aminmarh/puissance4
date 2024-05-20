@@ -12,7 +12,7 @@ public interface IPlayer {
      *
      * @return A String representing the player's name.
      */
-    public String getName();
+    String getName();
 
     /**
      * Retrieves the token type associated with the player.
@@ -20,7 +20,7 @@ public interface IPlayer {
      *
      * @return The Token representing the player's token type.
      */
-    public Token getToken();
+    Token getToken();
 
     /**
      * Executes a move by the player on the given game board.
@@ -28,5 +28,5 @@ public interface IPlayer {
      *
      * @param board The game board where the player will make their move.
      */
-    public void play(Board board);
+    void play(Board board);
 }

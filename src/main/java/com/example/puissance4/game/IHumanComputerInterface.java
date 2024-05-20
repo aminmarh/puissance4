@@ -14,7 +14,7 @@ public interface IHumanComputerInterface {
      *
      * @return An array of IPlayer representing the players involved in the game, fully initialized and ready to play.
      */
-    public IPlayer[] initGame();
+    IPlayer[] initGame();
 
     /**
      * Handles the end of the game, performing any necessary cleanup and displaying the game's outcome.
@@ -23,7 +23,7 @@ public interface IHumanComputerInterface {
      * @param winner The player who has won the game, or null if the game ended in a draw.
      * @param board The final state of the game board to be displayed or processed further.
      */
-    public void finishGame(IPlayer winner, Board board);
+    void finishGame(IPlayer winner, Board board);
 
     /**
      * Displays the current state of the game board.
@@ -32,7 +32,7 @@ public interface IHumanComputerInterface {
      *
      * @param board The current state of the game board to be displayed.
      */
-    public void showBoard(Board board);
+    void showBoard(Board board);
 
     /**
      * Refresh the human computer interface after every player move.

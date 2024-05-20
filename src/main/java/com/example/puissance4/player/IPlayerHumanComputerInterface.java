@@ -14,12 +14,12 @@ public interface IPlayerHumanComputerInterface {
      * @param playerName The name of the player making the move, used for personalized prompts.
      * @return The zero-based index of the column where the player wishes to place their token.
      */
-    public int playRound(String playerName);
+    int playRound(String playerName);
 
     /**
      * Notifies the player that an attempted move was invalid.
      * This method is called when a player makes a move that is not allowed by the game rules,
      * such as trying to place a token in a full column. It should instruct the player to make another move.
      */
-    public void badMove();
+    void badMove();
 }

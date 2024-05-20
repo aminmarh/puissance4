@@ -99,6 +99,14 @@ public class ConsoleInput implements IInput {
         }
     }
 
+    /**
+     * Retrieves the player's choice of language from the console input.
+     * The language choice is expected to be an integer corresponding to the desired language.
+     *
+     * @return The integer representing the player's choice of language.
+     * @throws InputMismatchException if the input provided is not an integer.
+     */
+    @Override
     public int retrieveLanguage() {
         try {
             return sc.nextInt();

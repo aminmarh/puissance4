@@ -16,17 +16,31 @@ import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.stream.Collectors;
 
+/**
+ * Save manages the saving and loading of game states for the Puissance 4 game.
+ * It provides methods for saving the current game state to a JSON file and loading a game state from a JSON file.
+ */
 @Component
 public class Save {
     private String filePath = "save.json";
     private Table table;
     private IPlayerFactory playerFactory;
 
+    /**
+     * Constructs a Save object with a specified game table and player factory.
+     * @param table the game table to save or load.
+     * @param playerFactory the player factory used to create players during loading.
+     */
     public Save (Table table, IPlayerFactory playerFactory){
         this.table = table;
         this.playerFactory = playerFactory;
     }
 
+    /**
+     * Saves the current game state to a JSON file.
+     * The method reads the current game state from the table and saves it to a JSON file.
+     * The file is saved in the default file path specified in the filePath attribute.
+     */
     public void saveBoardOnJson(Board board){
         try {
             String content = Files.lines(Paths.get(filePath)).collect(Collectors.joining());
@@ -41,17 +55,18 @@ public class Save {
                 jsonBoard.put(jsonRow);
             }
 
-
             jsonObject.put("board", jsonBoard);
-
-
             Files.write(Paths.get(filePath), jsonObject.toString().getBytes());
-
         } catch (IOException e) {
             e.printStackTrace();
         }
     }
 
+    /**
+     * Saves the current game state to a JSON file.
+     * The method reads the current game state from the table and saves it to a JSON file.
+     * The file is saved in the default file path specified in the filePath attribute.
+     */
     public void savePlayersToJson(IPlayer[] players) {
         try {
             String content = Files.lines(Paths.get(filePath)).collect(Collectors.joining());
@@ -73,6 +88,12 @@ public class Save {
         }
     }
 
+    /**
+     * Loads a game state from a JSON file.
+     * The method reads the game state from a JSON file and constructs a new game table with the saved state.
+     * The file is loaded from the default file path specified in the filePath attribute.
+     * @return A new game table with the loaded game state.
+     */
     public Table loadGame(){
         try {
             String content = Files.lines(Paths.get(filePath)).collect(Collectors.joining());
