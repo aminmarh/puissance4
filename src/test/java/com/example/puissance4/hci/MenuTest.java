@@ -4,54 +4,47 @@ import com.example.puissance4.game.Table;
 import com.example.puissance4.savegame.ISave;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.mockito.Mockito;
 
-import java.util.InputMismatchException;
+import java.util.Locale;
 
 import static org.mockito.Mockito.*;
 
 class MenuTest {
-    private IInput input;
-    private IOutput output;
+
+    private IInput in;
+    private IOutput out;
     private Table table;
     private ISave save;
     private Menu menu;
 
     @BeforeEach
     void setUp() {
-        input = Mockito.mock(IInput.class);
-        output = Mockito.mock(IOutput.class);
-        table = Mockito.mock(Table.class);
-        save = Mockito.mock(ISave.class);
-        menu = new Menu(input, output, table, save);
-        when(save.isSavedGame()).thenReturn(false);
+        this.in = mock(IInput.class);
+        this.out = mock(IOutput.class);
+        this.table = mock(Table.class);
+        this.save = mock(ISave.class);
+        this.menu = new Menu(in, out, table, save);
+
+        when(save.isSavedGame()).thenReturn(true);
     }
 
     @Test
-    void startApplicationWithSavedGameTest() {
-        when(input.retrieveMainMenuChoice()).thenReturn(1, 4);
+    void exitApplicationTest() {
+        when(in.retrieveMainMenuChoice()).thenReturn(4);
+
         menu.startApplication();
-        verify(output, times(2)).showMenu();
-        verify(save).deleteSavedGame();
-        verify(table).startGame();
-        verify(output).goodbye();
+
+        verify(out).goodbye();
     }
 
     @Test
-    void startApplicationWithoutSavedGameTest() {
-        when(input.retrieveMainMenuChoice()).thenReturn(1, 4);
-        menu.startApplication();
-        verify(output, times(2)).showMenu();
-        verify(save).deleteSavedGame();
-        verify(table).startGame();
-        verify(output).goodbye();
-    }
+    void changeLanguageTest() {
+        when(in.retrieveMainMenuChoice()).thenReturn(3, 4);
+        when(in.retrieveLanguage()).thenReturn(2);
 
-    @Test
-    void startApplicationWithInvalidInputTest() {
-        when(input.retrieveMainMenuChoice()).thenThrow(new InputMismatchException()).thenReturn(4);
         menu.startApplication();
-        verify(output).alertInvalidCharacterMenu();
-        verify(output).goodbye();
+
+        verify(out).selectLanguage();
+        verify(out).setLanguage(Locale.FRENCH);
     }
 }

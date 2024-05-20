@@ -13,6 +13,7 @@ import org.springframework.stereotype.Component;
 
 import java.io.IOException;
 import java.nio.file.Files;
+import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.logging.Logger;
 import java.util.stream.Collectors;
@@ -49,7 +50,7 @@ public class Save implements ISave {
         for (int i = 0; i < Board.ROWS; i++) {
             JSONArray jsonRow = new JSONArray();
             for (int j = 0; j < Board.COLUMNS; j++) {
-                jsonRow.put(boardArray[i][j]);
+                jsonRow.put(boardArray[i][j].name());
             }
             jsonBoard.put(jsonRow);
         }
@@ -66,7 +67,7 @@ public class Save implements ISave {
         for (IPlayer player : players) {
             JSONObject jsonPlayer = new JSONObject();
             jsonPlayer.put("name", player.getName());
-            jsonPlayer.put("token", player.getToken());
+            jsonPlayer.put("token", player.getToken().name());
             jsonPlayer.put("type", player instanceof AI ? "AI" : "Human");
             jsonPlayers.put(jsonPlayer);
         }
@@ -115,6 +116,11 @@ public class Save implements ISave {
         }
     }
 
+    /**
+     * Saves the current game state to a JSON file.
+     * The method reads the current game state from the table and saves it to a JSON file.
+     * The file is saved in the default file path specified in the filePath attribute.
+     */
     @Override
     public void saveGame() {
         JSONObject jsonObject = new JSONObject();
@@ -127,15 +133,26 @@ public class Save implements ISave {
         }
     }
 
+    /**
+     * Deletes the saved game state file.
+     * The method deletes the file containing the saved game state.
+     */
     @Override
     public boolean isSavedGame() {
         return Files.exists(Paths.get(FILE_PATH));
     }
 
+    /**
+     * Deletes the saved game state file.
+     * The method deletes the file containing the saved game state.
+     */
     @Override
     public void deleteSavedGame() {
         try {
-            Files.delete(Paths.get(FILE_PATH));
+            Path path = Paths.get(FILE_PATH);
+            if (Files.exists(path)){
+                Files.delete(path);
+            }
         } catch (IOException e) {
             Logger.getAnonymousLogger().severe("Error deleting save file: " + e.getMessage());
         }
