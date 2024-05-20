@@ -1,12 +1,9 @@
 package com.example.puissance4.hci;
 
-import com.example.puissance4.savegame.Save;
+import com.example.puissance4.savegame.ISave;
 import com.example.puissance4.game.Table;
 import org.springframework.stereotype.Component;
 
-import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Paths;
 import java.util.InputMismatchException;
 import java.util.Locale;
 
@@ -19,7 +16,7 @@ public class Menu implements IMenu {
     private final IInput in;
     private final IOutput out;
     private final Table table;
-    private Save save;
+    private final ISave save;
 
 
     /**
@@ -30,7 +27,7 @@ public class Menu implements IMenu {
      * @param table The main game logic handler, responsible for managing gameplay.
      * @param save  The save handler for managing game saves.
      */
-    public Menu(IInput in, IOutput out, Table table, Save save) {
+    public Menu(IInput in, IOutput out, Table table, ISave save) {
         this.in = in;
         this.out = out;
         this.table = table;
@@ -84,7 +81,7 @@ public class Menu implements IMenu {
             } catch (InputMismatchException e) {
                 out.alertInvalidCharacterMenu();
             } catch (ReturnToMenuException e) {
-                handleReturnToMenu();
+                save.saveGame(); // Save the game if the player stops playing
             }
         }
     }
@@ -98,20 +95,23 @@ public class Menu implements IMenu {
      * @return A boolean indicating whether the application should continue running after the action.
      */
     private boolean handleMenuChoice(int choice) {
-        switch (choice) {
-            case 1:
-                clearSaveFile();
-                return handleStartGame();
-            case 2:
-                return handleResumeOrChangeLanguage();
-            case 3:
-                return handleLanguageOrExit();
-            case 4:
-                return handleExit();
-            default:
+        return switch (choice) {
+            case 1 -> {
+                save.deleteSavedGame();
+                handleStartGame();
+                yield true;
+            }
+            case 2 -> {
+                handleResumeOrChangeLanguage();
+                yield true;
+            }
+            case 3 -> handleLanguageOrExit();
+            case 4 -> handleExit();
+            default -> {
                 out.alertInvalidCharacterMenu();
-                return true;
-        }
+                yield true;
+            }
+        };
     }
 
     /**
@@ -119,16 +119,14 @@ public class Menu implements IMenu {
      * This method creates a new game table, initializes the players, and starts the game.
      * It returns a boolean indicating whether the application should continue running after starting the game.
      *
-     * @return A boolean indicating whether the application should continue running after starting the game.
      */
-    private boolean handleStartGame() {
+    private void handleStartGame() {
         try {
             table.startGame();
         } catch (ReturnToMenuException e) {
-            saveGameState();
+            save.saveGame();
             throw e;
         }
-        return true;
     }
 
     /**
@@ -136,17 +134,15 @@ public class Menu implements IMenu {
      * This method loads the saved game state if available or prompts the user to change the language.
      * It returns a boolean indicating whether the application should continue running after loading the game or changing the language.
      *
-     * @return A boolean indicating whether the application should continue running after loading the game or changing the language.
      */
-    private boolean handleResumeOrChangeLanguage() {
-        if (saveFileExists()) {
+    private void handleResumeOrChangeLanguage() {
+        // Continue to language change
+        if (save.isSavedGame()) {
             save.loadGame();
             table.continueGame();
-            deleteSaveFile();
-            return true; // Game continues after loading
+            save.deleteSavedGame();
         } else {
             initLanguage(out);
-            return true; // Continue to language change
         }
     }
 
@@ -158,7 +154,7 @@ public class Menu implements IMenu {
      * @return A boolean indicating whether the application should continue running after changing the language or exiting.
      */
     private boolean handleLanguageOrExit() {
-        if (saveFileExists()) {
+        if (save.isSavedGame()) {
             initLanguage(out);
             return true; // Continue to language change
         } else {
@@ -175,7 +171,7 @@ public class Menu implements IMenu {
      * @return A boolean indicating whether the application should continue running after the user's choice.
      */
     private boolean handleExit() {
-        if (saveFileExists()) {
+        if (save.isSavedGame()) {
             out.goodbye();
             return false; // Exit the application
         } else {
@@ -189,55 +185,10 @@ public class Menu implements IMenu {
      * This method shows the main menu options to the user, including the option to resume a game if a save file exists.
      */
     private void displayMenu() {
-        if (saveFileExists()) {
+        if (save.isSavedGame()) {
             out.showMenuWithResume();
         } else {
             out.showMenu();
         }
     }
-
-    /**
-     * Checks if the save file exists in the current directory.
-     *
-     * @return A boolean indicating whether the save file exists in the current directory.
-     */
-    private boolean saveFileExists() {
-        return Files.exists(Paths.get("save.json"));
-    }
-
-    /**
-     * Clears the save file from the current directory.
-     */
-    private void clearSaveFile() {
-        if (saveFileExists()) {
-            deleteSaveFile();
-        }
-    }
-
-    /**
-     * Deletes the save file from the current directory.
-     */
-    private void deleteSaveFile() {
-        try {
-            Files.delete(Paths.get("save.json"));
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
-
-    /**
-     * Handles the user's choice to return to the main menu, saving the game state before returning.
-     */
-    private void handleReturnToMenu() {
-        saveGameState();
-    }
-
-    /**
-     * Saves the current game state to a JSON file.
-     */
-    private void saveGameState() {
-        save.savePlayersToJson(table.getPlayers());
-        save.saveBoardOnJson(table.getBoard());
-    }
-
 }

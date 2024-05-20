@@ -14,17 +14,19 @@ import org.springframework.stereotype.Component;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
+import java.util.logging.Logger;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 /**
  * Save manages the saving and loading of game states for the Puissance 4 game.
  * It provides methods for saving the current game state to a JSON file and loading a game state from a JSON file.
  */
 @Component
-public class Save {
-    private String filePath = "save.json";
-    private Table table;
-    private IPlayerFactory playerFactory;
+public class Save implements ISave {
+    private static final String FILE_PATH = "save.json";
+    private final Table table;
+    private final IPlayerFactory playerFactory;
 
     /**
      * Constructs a Save object with a specified game table and player factory.
@@ -41,25 +43,17 @@ public class Save {
      * The method reads the current game state from the table and saves it to a JSON file.
      * The file is saved in the default file path specified in the filePath attribute.
      */
-    public void saveBoardOnJson(Board board){
-        try {
-            String content = Files.lines(Paths.get(filePath)).collect(Collectors.joining());
-            JSONObject jsonObject = new JSONObject(content);
-            JSONArray jsonBoard = new JSONArray();
-            Token[][] boardArray = board.getBoard();
-            for (int i = 0; i < Board.ROWS; i++) {
-                JSONArray jsonRow = new JSONArray();
-                for (int j = 0; j < Board.COLUMNS; j++) {
-                    jsonRow.put(boardArray[i][j]);
-                }
-                jsonBoard.put(jsonRow);
+    private JSONArray saveBoardOnJson(Board board){
+        JSONArray jsonBoard = new JSONArray();
+        Token[][] boardArray = board.getBoard();
+        for (int i = 0; i < Board.ROWS; i++) {
+            JSONArray jsonRow = new JSONArray();
+            for (int j = 0; j < Board.COLUMNS; j++) {
+                jsonRow.put(boardArray[i][j]);
             }
-
-            jsonObject.put("board", jsonBoard);
-            Files.write(Paths.get(filePath), jsonObject.toString().getBytes());
-        } catch (IOException e) {
-            e.printStackTrace();
+            jsonBoard.put(jsonRow);
         }
+        return jsonBoard;
     }
 
     /**
@@ -67,36 +61,30 @@ public class Save {
      * The method reads the current game state from the table and saves it to a JSON file.
      * The file is saved in the default file path specified in the filePath attribute.
      */
-    public void savePlayersToJson(IPlayer[] players) {
-        try {
-            String content = Files.lines(Paths.get(filePath)).collect(Collectors.joining());
-            JSONObject jsonObject = new JSONObject(content);
-            JSONArray jsonPlayers = new JSONArray();
-
-            for (IPlayer player : players) {
-                JSONObject jsonPlayer = new JSONObject();
-                jsonPlayer.put("name", player.getName());
-                jsonPlayer.put("token", player.getToken());
-                jsonPlayer.put("type", player instanceof AI ? "AI" : "Human");
-                jsonPlayers.put(jsonPlayer);
-            }
-
-            jsonObject.put("player", jsonPlayers);
-            Files.write(Paths.get(filePath), jsonObject.toString().getBytes());
-        } catch (IOException e) {
-            e.printStackTrace();
+    private JSONArray savePlayersToJson(IPlayer[] players) {
+        JSONArray jsonPlayers = new JSONArray();
+        for (IPlayer player : players) {
+            JSONObject jsonPlayer = new JSONObject();
+            jsonPlayer.put("name", player.getName());
+            jsonPlayer.put("token", player.getToken());
+            jsonPlayer.put("type", player instanceof AI ? "AI" : "Human");
+            jsonPlayers.put(jsonPlayer);
         }
+        return jsonPlayers;
     }
 
     /**
      * Loads a game state from a JSON file.
      * The method reads the game state from a JSON file and constructs a new game table with the saved state.
      * The file is loaded from the default file path specified in the filePath attribute.
-     * @return A new game table with the loaded game state.
      */
-    public Table loadGame(){
+    @Override
+    public void loadGame(){
         try {
-            String content = Files.lines(Paths.get(filePath)).collect(Collectors.joining());
+            String content;
+            try (Stream<String> lines = Files.lines(Paths.get(FILE_PATH))) {
+                content = lines.collect(Collectors.joining());
+            }
             JSONObject jsonObject = new JSONObject(content);
 
             Board board = new Board();
@@ -120,13 +108,36 @@ public class Save {
             }
             this.table.setBoard(board);
             this.table.setPlayers(playerFactory.getPlayers());
-            return table;
         } catch (IOException e) {
-            e.printStackTrace();
+            Logger.getAnonymousLogger().severe("Error loading game state from file: " + e.getMessage());
         } catch (InvalidPlayerTypeException e) {
-            throw new RuntimeException(e);
+            Logger.getAnonymousLogger().severe("Error creating player: " + e.getMessage());
         }
+    }
 
-        return null;
+    @Override
+    public void saveGame() {
+        JSONObject jsonObject = new JSONObject();
+        jsonObject.put("board", saveBoardOnJson(table.getBoard()));
+        jsonObject.put("player", savePlayersToJson(table.getPlayers()));
+        try {
+            Files.write(Paths.get(FILE_PATH), jsonObject.toString().getBytes());
+        } catch (IOException e) {
+            Logger.getAnonymousLogger().severe("Error saving game state to file: " + e.getMessage());
+        }
+    }
+
+    @Override
+    public boolean isSavedGame() {
+        return Files.exists(Paths.get(FILE_PATH));
+    }
+
+    @Override
+    public void deleteSavedGame() {
+        try {
+            Files.delete(Paths.get(FILE_PATH));
+        } catch (IOException e) {
+            Logger.getAnonymousLogger().severe("Error deleting save file: " + e.getMessage());
+        }
     }
 }
