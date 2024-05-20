@@ -9,6 +9,10 @@ public class Board {
     public static final int COLUMNS = 7;
     private Token[][] board;
 
+    public void setBoard(Token[][] board) {
+        this.board = board;
+    }
+
     /**
      * Initializes an empty game board with all slots set to Token.Empty.
      */

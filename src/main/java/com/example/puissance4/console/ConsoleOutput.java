@@ -64,19 +64,6 @@ public class ConsoleOutput implements IOutput {
     }
 
     /**
-     * Displays an error message if an invalid language selection is made.
-     * This method alerts the user to an invalid choice by outputting a localized error message,
-     * ensuring that users are aware of the mistake and prompted to correct it.
-     */
-    public void alertLanguageError (){
-        try {
-            out.write(l10n.getMessage("number_error_menu", null, this.language).getBytes(StandardCharsets.UTF_8));
-        } catch (Exception e) {
-            Logger.getAnonymousLogger().severe(e.getMessage());
-        }
-    }
-
-    /**
      * Displays a welcome message to the user.
      */
     @Override
@@ -125,6 +112,9 @@ public class ConsoleOutput implements IOutput {
         }
     }
 
+    /**
+     * Alerts the user that the inputted number is invalid for the menu.
+     */
     @Override
     public void alertInvalidCharacterMenu() {
         try {
@@ -172,6 +162,9 @@ public class ConsoleOutput implements IOutput {
         }
     }
 
+    /**
+     * Alerts the user that the chosen column is full.
+     */
     @Override
     public void alertFullColumn() {
         try {
@@ -240,6 +233,18 @@ public class ConsoleOutput implements IOutput {
     public void showMenu() {
         try {
             out.write(l10n.getMessage("main_menu_message", null, this.language).getBytes(StandardCharsets.UTF_8));
+        } catch (Exception e) {
+            Logger.getAnonymousLogger().severe(e.getMessage());
+        }
+    }
+
+    /**
+     * Display the menu options with resume game using localized text.
+     */
+    @Override
+    public void showMenuWithResume() {
+        try {
+            out.write(l10n.getMessage("main_menu_message_with_resume", null, this.language).getBytes(StandardCharsets.UTF_8));
         } catch (Exception e) {
             Logger.getAnonymousLogger().severe(e.getMessage());
         }

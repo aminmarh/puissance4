@@ -3,6 +3,9 @@ package com.example.puissance4.hci;
 import com.example.puissance4.player.IPlayerHumanComputerInterface;
 import org.springframework.stereotype.Component;
 
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.util.InputMismatchException;
 
 /**
@@ -23,6 +26,7 @@ public class PlayerHumanComputerInterface implements IPlayerHumanComputerInterfa
     public PlayerHumanComputerInterface(IInput in, IOutput out) {
         this.in = in;
         this.out = out;
+
     }
 
     /**
@@ -43,6 +47,9 @@ public class PlayerHumanComputerInterface implements IPlayerHumanComputerInterfa
                 choice = in.retrievePlayerMove();
                 if (choice >= 1 && choice <= 7) {
                     validNumber = true;
+                } else if (choice == 0) {
+                    createEmptySaveFile();
+                    throw new ReturnToMenuException();
                 } else {
                     out.alertInvalidColumn();
                 }
@@ -59,5 +66,16 @@ public class PlayerHumanComputerInterface implements IPlayerHumanComputerInterfa
     @Override
     public void badMove() {
         out.alertFullColumn();
+    }
+
+    /**
+     * Creates an empty save file with '{}' when player chooses to return to the menu.
+     */
+    private void createEmptySaveFile() {
+        try {
+            Files.write(Paths.get("save.json"), "{}".getBytes());
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 }
