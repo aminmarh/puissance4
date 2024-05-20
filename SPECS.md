@@ -57,5 +57,14 @@ Here are the specifications for our Connect Four game.
 ### 7. End of Game
 - **Description**: The winner is announced, and the game automatically returns to the main menu.
 
+### 8. Functionality to pause the game
+- **Description**: When a game (with at least one human player) is in progress, the player can pause the game at any time (this is saved) and resume the game later. If a new game is started, the paused game is overwritten.
+- **Enter**: In the case of the console, the number 0 will pause the game. The player is redirected to the main menu.
+- Pause**:
+  - When the pause is requested, we need to be able to save the game table (players and board) in a json file using the JSON library.
+  - When the player wants to resume the game, we need to be able to read the json file and pick up where the game left off (checking which player played last).
+- Menu changes** :
+  - Add the "Resume" option to the main menu (if a game is paused).
+  - Display or not the "Resume" option depending on the presence of a paused game.
 ---
 End of specifications
