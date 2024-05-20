@@ -4,6 +4,10 @@ import com.example.puissance4.game.Board;
 import com.example.puissance4.game.InvalidMoveException;
 import com.example.puissance4.game.Token;
 
+import java.util.logging.Logger;
+
+import static java.lang.System.exit;
+
 /**
  * Represents an AI player in the Puissance 4 game.
  * This class extends the Player class and implements an AI that can make strategic moves.
@@ -30,7 +34,8 @@ public class AI extends Player {
         try {
             board.putToken(move, this.getToken());
         } catch (InvalidMoveException e) {
-            // TODO: If an invalid move exception occurs, log it or handle accordingly. This catch block could also implement a fallback strategy if the initial move fails.
+            Logger.getAnonymousLogger().severe("Error ai player: " + e.getMessage());
+            exit(1);
         }
     }
 
