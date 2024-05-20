@@ -29,7 +29,7 @@ Ensuite, la partie se lance en fonction des choix qui ont été saisi (Humain co
 Quant au joueur IA, il va essayer de trouver le meilleur coup possible en fonction de l'état actuel du plateau. 
 Il vérifie d'abord s'il existe un coup gagnant, puis un coup pour bloquer la victoire de l'adversaire, et enfin, par défaut, un coup aléatoire.
 
-### 3. Déroulement de la partie 
+### 4. Déroulement de la partie 
 - **Description** : À chaque tour, on demande à chaque joueur de déposer un jeton en affichant la grille de jeu 7x6, et en invitant le joueur à joueur par son nom s'il s'agit d'un humain.
 Lorsque 2 IA jouent entre elles, la partie se déroule automatiquement et la grille s'affiche à la fin avec le nom de l'IA gagnante ou match nul
 Pour un meilleur design et une meilleure compréhension, le joueur 1 a la couleur rouge avec la lettre "R" et le joueur 2 la couleur jaune avec la lettre "Y".
@@ -40,7 +40,7 @@ Pour un meilleur design et une meilleure compréhension, le joueur 1 a la couleu
 - **Entrées** :
     - Entrer le chiffre à la colonne correspondante pour placer un pion
 
-### 4. Gestion des erreurs
+### 5. Gestion des erreurs
 - **Description** : Lorsqu'un utilisateur fait une entrée, des vérifications sont effectuées pour s'assurer que la valeur entrée est valide.
 - **Vérifications** :
   - Menu principal : Lors du choix d'une option du menu, l'entrée doit être comprise entre 1 et 3 (Play, Langage, Quit). Si ce n'est pas le cas, une exception est lancée et l'utilisateur est invité à saisir une nouvelle valeur.
@@ -48,7 +48,7 @@ Pour un meilleur design et une meilleure compréhension, le joueur 1 a la couleu
   - Choix du type de partie : Lors de l'entrée du type de joueur entre 1 et 2 (Humain, IA), des vérifications sont faites pour s'assurer que l'entrée soit valide. Si ce n'est pas le cas, une exception est lancée et l'utilisateur est invité à saisir une nouvelle valeur.
   - Choix de colonne : Lors de l'entrée du numéro de colonne pour placer un jeton, la valeur doit correspondre à une colonne valide du jeu entre 1 et 7. Si ce n'est pas le cas ou si la colonne est pleine, une exception est lancée et l'utilisateur est invité à saisir une nouvelle valeur.
   
-### 5. Conditions de victoire ou nul
+### 6. Conditions de victoire ou nul
 - **Description** : Détection de la victoire lorsqu'un joueur aligne quatre jetons horizontalement, verticalement ou en diagonale. Détection de match nul si la grille est pleine et qu'aucun joueur n'a aligné quatre jetons, la partie se termine en match nul.
 - **Vérifications** :
     - Alignement horizontal de quatre jetons
@@ -56,7 +56,17 @@ Pour un meilleur design et une meilleure compréhension, le joueur 1 a la couleu
     - Alignement diagonal de quatre jetons
     - Grille complète sans aucun alignement de 4 jetons
 
-### 6. Fin de partie
+### 7. Fin de partie
 - **Description** : Annonce du gagnant et retour automatique au menu principal.
+
+### 8. Fontionnalité pour mettre le jeu en pause
+- **Description** : Lorsque une partie (avec au moins un joueur humain) est en cours, le joueur peut mettre le jeu en pause à tout moment (celle-ci est sauvegardée) et reprendre la partie plus tard. Si une nouvelle partie est lancée, la partie en pause est écrasée.
+- **Entrée** : Dans le cas de la console, le chiffre 0 mettera le jeu en pause. Le joueur est redirigé vers le menu principal.
+- **Mise en place** : 
+  - Lorsque la pause est demandée nous devons pouvoir enregistrer la table de jeu (joueurs et plateau) dans un fichier json avec la librairie JSON.
+  - Lorsque le joueur veut reprendre la partie, nous devons pouvoir lire le fichier json et reprendre la partie là où elle s'est arrêtée (en vérifiant le dernier joueur ayant joué).
+- **Modifications du menu** :
+  - Ajout de l'option "Reprendre" dans le menu principal (si une partie est en pause).
+  - Affichage ou non de l'option "Reprendre" en fontion de la présence d'une partie en pause.
 ---
 Fin des spécifications
